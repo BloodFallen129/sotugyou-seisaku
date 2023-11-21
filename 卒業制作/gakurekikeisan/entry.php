@@ -176,11 +176,36 @@ if(!empty($_POST)){
         $error['municipalities2'] = "blank";
     }
     if($_POST['municipalities_kana2'] === ""){
-        $error[''] = "blank";
+        $error['municipalities_kana2'] = "blank";
+    }
+    if($_POST['housenumber2'] === ""){
+        $error['housenumber2'] = "blank";
+    }
+    if($_POST['housenumber_kana2'] === ""){
+        $error['housenumber_kana2'] = "blank";
+    }
+    if($_POST['mansion2'] === ""){
+        $error['mansion2'] = "blank";
+    }
+    if($_POST['mansion_kana2'] === ""){
+        $error['mansion_kana2'] = "blank";
+    }
+    if($_POST['p_name'] === ""){
+        $error['p_name'] = "blank";
+    }
+    if($_POST['j_name'] === ""){
+        $error['j_name'] = "blank";
+    }
+    if($_POST['h_name'] === ""){
+        $error['h_name'] = "blank";
+    }
+    if($_POST['u_name'] === ""){
+        $error['u_name'] = "blank";
     }
 
-
-
+    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $error['email'] = "invalid";
+    }
 
 
 
