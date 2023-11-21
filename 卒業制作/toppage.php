@@ -87,10 +87,10 @@
     <a href="toppage.php">
     <img src="image/jobsupport2.png" alt="Job Support" class="logo">
   </a>
-    <a href="#">履歴書作成</a> |
+    <a href="gakurekikeisan/gakurekikeisan.php">履歴書作成</a> |
     <a href="sikaku.php">資格登録</a> |
-    <a href="#">メール</a> |
-    <a href="#">To do</a> |
+    <a href="mail/index.php">メール</a> |
+    <a href="todolist/todolist.php">To do</a> |
     <a href="#">カレンダー</a>
   </div>
   
