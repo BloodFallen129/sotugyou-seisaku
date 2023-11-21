@@ -157,6 +157,33 @@ if(!empty($_POST)){
     if($_POST['housenumber_kana1'] === ""){
         $error['housenumber_kana1'] = "blank";
     }
+    if($_POST['mansion1'] === ""){
+        $error['mansion1'] = "blank";
+    }
+    if($_POST['mansion_kana1'] === ""){
+        $error['mansion_kana1'] = "blank";
+    }
+    if($_POST['postalcode2'] === ""){
+        $error['postalcode2'] = "blank";
+    }
+    if($_POST['prefecture2'] === ""){
+        $error['prefecture2'] = "blank";
+    }
+    if($_POST['prefecture_kana2'] === ""){
+        $error['prefecture_kana2'] = "blank";
+    }
+    if($_POST['municipalities2'] === ""){
+        $error['municipalities2'] = "blank";
+    }
+    if($_POST['municipalities_kana2'] === ""){
+        $error[''] = "blank";
+    }
+
+
+
+
+
+
 
     // エラーがない場合、入力されたIDがすでに存在するかどうかを確認
     if(!isset($error)){
