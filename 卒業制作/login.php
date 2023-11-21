@@ -1,5 +1,4 @@
 <?php
-// こんにちは
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // データベース接続情報
   $hostname = "localhost";
