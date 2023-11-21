@@ -1,5 +1,5 @@
 <?php
-
+//こんにちは
 $hostname = "localhost";
 $username = "root";
 $password = "";
