@@ -1,64 +1,71 @@
 <?php
 require("./dbconnect.php");
 session_start();
- 
+
+// エラー変数を初期化
+$error = '';
+
 /* 会員登録の手続き以外のアクセスを飛ばす */
 if (!isset($_SESSION['join'])) {
     header('Location: entry.php');
     exit();
 }
- 
+
 if (!empty($_POST['check'])) {
-    // パスワードを暗号化
-    $hash = password_hash($_SESSION['join']['password'], PASSWORD_BCRYPT);
- 
-    // 入力情報をデータベースに登録
-    $statement = $db->prepare("INSERT INTO gakureki SET id=?,name=?, name_kana=?, b_year=?,b_month=?,b_day=?,age=?,gender=?,email=?,tel1=?,tel2=?,tel3=?,postalcode1=?,prefecture1=?,prefecture_kana1=?,municipalities1=?,municipalities_kana1=?,housenumber1=?,housenumber_kana1=?,mansion1=?,mansion_kana1=?,postalcode2=?,prefecture2=?,prefecture_kana2=?,municipalities2=?,municipalities_kana2=?,housenumber2=?,housenumber_kana2=?,mansion2=?,mansion_kana2=?,p_name=?,p_year=?,j_name=?,j_year=?,h_name=?,h_year=?,u_name=?,u_year=?,pic=?");
-    $statement->execute(array(
-        $_SESSION['join']['id'],
-        $_SESSION['join']['name1'],
-        $_SESSION['join']['name_kana1'],
-        $_SESSION['join']['b_year'],
-        $_SESSION['join']['b_month'],
-        $_SESSION['join']['b_day'],
-        $_SESSION['join']['age'],
-        $_SESSION['join']['gender'],
-        $_SESSION['join']['email'],
-        $_SESSION['join']['tel1'],
-        $_SESSION['join']['tel2'],
-        $_SESSION['join']['tel3'],
-        $_SESSION['join']['postalcode1'],
-        $_SESSION['join']['prefecture1'],
-        $_SESSION['join']['prefecture_kana1'],
-        $_SESSION['join']['municipalities1'],
-        $_SESSION['join']['municipalities_kana1'],
-        $_SESSION['join']['housenumber1'],
-        $_SESSION['join']['housenumber_kana1'],
-        $_SESSION['join']['mansion1'],
-        $_SESSION['join']['mansion_kana1'],
-        $_SESSION['join']['postalcode2'],
-        $_SESSION['join']['prefecture2'],
-        $_SESSION['join']['prefecture_kana2'],
-        $_SESSION['join']['municipalities2'],
-        $_SESSION['join']['municipalities_kana2'],
-        $_SESSION['join']['housenumber2'],
-        $_SESSION['join']['housenumber_kana2'],
-        $_SESSION['join']['mansion2'],
-        $_SESSION['join']['mansion_kana2'],
-        $_SESSION['join']['p_name'],
-        $_SESSION['join']['p_year'],
-        $_SESSION['join']['j_name'],
-        $_SESSION['join']['j_year'],
-        $_SESSION['join']['h_name'],
-        $_SESSION['join']['h_year'],
-        $_SESSION['join']['u_name'],
-        $_SESSION['join']['u_year'],
-        $_SESSION['join']['pic'],
-    ));
- 
-    unset($_SESSION['join']);   // セッションを破棄
-    header('Location: thank.php');   // thank.phpへ移動
-    exit();
+    try {
+        // パスワードを暗号化
+        $hash = password_hash($_SESSION['join']['password'], PASSWORD_BCRYPT);
+
+        // 入力情報をデータベースに登録
+        $statement = $db->prepare("INSERT INTO gakureki (id, name, name_kana, b_year, b_month, b_day, age, gender, email, tel1, tel2, tel3, postalcode1, prefecture1, prefecture_kana1, municipalities1, municipalities_kana1, housenumber1, housenumber_kana1, mansion1, mansion_kana1, postalcode2, prefecture2, prefecture_kana2, municipalities2, municipalities_kana2, housenumber2, housenumber_kana2, mansion2, mansion_kana2, p_name, p_year, j_name, j_year, h_name, h_year, u_name, u_year, pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $statement->execute(array(
+            $_SESSION['join']['id'],
+            $_SESSION['join']['name1'],
+            $_SESSION['join']['name_kana1'],
+            $_SESSION['join']['b_year'],
+            $_SESSION['join']['b_month'],
+            $_SESSION['join']['b_day'],
+            $_SESSION['join']['age'],
+            $_SESSION['join']['gender'],
+            $_SESSION['join']['email'],
+            $_SESSION['join']['tel1'],
+            $_SESSION['join']['tel2'],
+            $_SESSION['join']['tel3'],
+            $_SESSION['join']['postalcode1'],
+            $_SESSION['join']['prefecture1'],
+            $_SESSION['join']['prefecture_kana1'],
+            $_SESSION['join']['municipalities1'],
+            $_SESSION['join']['municipalities_kana1'],
+            $_SESSION['join']['housenumber1'],
+            $_SESSION['join']['housenumber_kana1'],
+            $_SESSION['join']['mansion1'],
+            $_SESSION['join']['mansion_kana1'],
+            $_SESSION['join']['postalcode2'],
+            $_SESSION['join']['prefecture2'],
+            $_SESSION['join']['prefecture_kana2'],
+            $_SESSION['join']['municipalities2'],
+            $_SESSION['join']['municipalities_kana2'],
+            $_SESSION['join']['housenumber2'],
+            $_SESSION['join']['housenumber_kana2'],
+            $_SESSION['join']['mansion2'],
+            $_SESSION['join']['mansion_kana2'],
+            $_SESSION['join']['p_name'],
+            $_SESSION['join']['p_year'],
+            $_SESSION['join']['j_name'],
+            $_SESSION['join']['j_year'],
+            $_SESSION['join']['h_name'],
+            $_SESSION['join']['h_year'],
+            $_SESSION['join']['u_name'],
+            $_SESSION['join']['u_year'],
+            $_SESSION['join']['pic'],
+        ));
+
+        unset($_SESSION['join']); // セッションを破棄
+        header('Location: thank.php'); // thank.phpへ移動
+        exit();
+    } catch (PDOException $e) {
+        $error = "error"; // エラーが発生した場合
+    }
 }
 ?>
 <!DOCTYPE html>
