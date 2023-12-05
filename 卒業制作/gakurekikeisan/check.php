@@ -8,6 +8,9 @@ if (!isset($_SESSION['join'])) {
     exit();
 }
 
+//
+
+
 if (!empty($_POST['check'])) {
 
     // 入力情報をデータベースに登録
