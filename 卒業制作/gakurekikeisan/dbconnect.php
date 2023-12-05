@@ -11,3 +11,4 @@ try{
     echo "データベースエラー:" .$e->getMessage();
 }
 ?>
+
