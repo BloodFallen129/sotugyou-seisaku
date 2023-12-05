@@ -535,6 +535,31 @@ if(!empty($_POST)){
                     <p class="error">＊入力してください</p>
                     <?php endif ?>
 
+                    <script>
+                        var prefectureSelect1 = document.getElementById("prefecture1");
+                        var prefectureKanaInput1 = document.getElementById("prefecture_kana1");
+                        
+                        var prefectureSelect2 = document.getElementById("prefecture2");
+                        var prefectureKanaInput2 = document.getElementById("prefecture_kana2");
+
+                        // 選択が変更されたときのJavaScriptのイベントリスナーを設定
+                        prefectureSelect1.addEventListener("change", function() {
+                            var selectedPrefecture = prefectureSelect1.value;
+                            var furigana = <?php echo json_encode($prefectureData); ?>[selectedPrefecture];
+                            prefectureKanaInput1.value = furigana;
+                        });
+
+                        prefectureSelect2.addEventListener("change", function() {
+                            var selectedPrefecture = prefectureSelect2.value;
+                            var furigana = <?php echo json_encode($prefectureData); ?>[selectedPrefecture];
+                            prefectureKanaInput2.value = furigana;
+                        });
+
+                        // ふりがな入力フィールドを読み取り専用から通常のフィールドに変更
+                        prefectureKanaInput1.readOnly = false;
+                        prefectureKanaInput2.readOnly = false;
+                    </script>
+
                 <label for="municipalities_kana2">市区町村(ふりがな)</label>
                     <input type="text" id="municipalities_kana2" name="municipalities_kana2"><br>
                     <?php if (!empty($error["municipalities_kana2"]) && $error['municipalities_kana2'] === 'blank'): ?>
