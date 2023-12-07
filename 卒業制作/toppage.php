@@ -1,3 +1,13 @@
+<?php
+    session_start(); // セッションを開始
+    if (isset($_SESSION["user_name"])) {
+      $user_name = $_SESSION["user_name"];
+      $message = "ようこそ、{$user_name}さん";
+    } else {
+      $message = "セッションエラー";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -12,30 +22,27 @@
       background-color: #f2f2f2;
     }
 
-.header {
-  background-color: #007bff;
-  color: #fff;
-  padding: 20px 0;
-  text-align: center;
-}
+    .header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
 
-.header a {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 15px;
-  font-weight: bold;
-}
+    .header a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
 
-.logo {
-  width: 200px;
-  height: auto;
-  position: absolute;
-  top: -20px; /* 画像を上に10px移動 */
-  left: 10px;
-}
-
-
-
+    .logo {
+      width: 200px;
+      height: auto;
+      position: absolute;
+      top: -20px; /* 画像を上に10px移動 */
+      left: 10px;
+    }
 
     .container {
       max-width: 800px;
@@ -87,26 +94,18 @@
     <a href="toppage.php">
     <img src="image/jobsupport2.png" alt="Job Support" class="logo">
   </a>
-    <a href="gakurekikeisan/entry.php">履歴書作成</a> |
+    <a href="#">履歴書作成</a> |
     <a href="sikaku.php">資格登録</a> |
-    <a href="mail/index.php">メール</a> |
-    <a href="todolist/todolist.php">To do</a> |
+    <a href="#">メール</a> |
+    <a href="#">To do</a> |
     <a href="#">カレンダー</a>
   </div>
   
   <div class="container">
     <h1>ホーム</h1>
     <?php
-    session_start(); // セッションを開始
-    if (isset($_SESSION["user_name"])) {
-      $user_name = $_SESSION["user_name"];
-      echo "ようこそ、{$user_name}さん";
-    } else {
-      echo "セッションエラー";
-    }
+      echo $message;
     ?>
-
-  
   </span>
 </div>
 </body>

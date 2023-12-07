@@ -124,10 +124,7 @@
           transform: scale(1.5);
           }
         
-        label#sinki{
-          border: solid 1px #ffffff;
-          margin-left: 20px;
-        }
+        
           
           
     </style>
@@ -143,13 +140,11 @@
     <a href="#">メール</a> |
     <a href="#">To do</a> |
     <a href="#">カレンダー</a>
-    <label id='sinki'><a href="registration.php">新規登録はこちら</a></label>
   </div>
 
   <main>
     <div id="input">
       <label>TODO: <input id="todo"></label><br>
-
       <label id="sentaku">優先度: </label>
       <select>
         <option>低</option>

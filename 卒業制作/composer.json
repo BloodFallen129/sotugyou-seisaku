@@ -1,0 +1,8 @@
+{
+    "name": "your/project",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "felica/php-felica": "^1.0"
+    }
+}
