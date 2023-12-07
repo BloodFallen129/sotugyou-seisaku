@@ -139,7 +139,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form method="post" action="registration.php">
       <p>新規登録は <a href="registration.php">こちら</a></p>
     </form>
-    <p>会社用のログインページは <a href="company_login.php">こちら</a></p>
 </div>
   </div>
 </body>
