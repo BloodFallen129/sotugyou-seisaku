@@ -91,9 +91,9 @@
     <a href="sikaku.php">資格登録</a> |
     <a href="mail/index.php">メール</a> |
     <a href="todolist/todolist.php">To do</a> |
-    <a href="#">カレンダー</a>
+    <a href="calendar.php">カレンダー</a>
   </div>
-  
+
   <div class="container">
     <h1>ホーム</h1>
     <?php
@@ -106,7 +106,6 @@
     }
     ?>
 
-  
   </span>
 </div>
 </body>
