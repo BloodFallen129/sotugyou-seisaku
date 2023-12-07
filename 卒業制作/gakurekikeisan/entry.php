@@ -1,11 +1,27 @@
 <?php
-require_once("./dbconnect.php");
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$hostname = "localhost";
+$username = "root";
+$password = "";
+$dbname = "gakureki";
+
+try{
+    $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
+}catch(PDOException $e){
+    echo "データベースエラー:" .$e->getMessage();
+}
+$sql = "SELECT * FROM `rirekisho`;";
+$sql = $db->prepare($sql);
+//require_once("./dbconnect.php");
 session_start();
 
 // エラー変数を初期化
 $error = '';
 
 /* 会員登録の手続き以外のアクセスを飛ばす */
+
 
 $id = isset($_SESSION['join']['id']) ? $_SESSION['join']['id'] : null;
 $name = isset($_SESSION['join']['name']) ? $_SESSION['join']['name'] : null;
@@ -58,49 +74,54 @@ if (!empty($_POST['check'])) {
             $sqlInsert = "INSERT INTO rirekisho(id, name, name_kana, birthday, age, gender, email, tel1, tel2, tel3, postalcode1, prefecture1, prefecture_kana1, municipalities1, municipalities_kana1, housenumber1, housenumber_kana1, mansion1, mansion_kana1, postalcode2, prefecture2, prefecture_kana2, municipalities2, municipalities_kana2, housenumber2, housenumber_kana2, mansion2, mansion_kana2, p_name, j_name, h_name, u_name, pic) VALUES (:id, :name, :name_kana, :birthday, :age, :gender, :email, :tel1, :tel2, :tel3, :postalcode1, :prefecture1, :prefecture_kana1, :municipalities1, :municipalities_kana1, :housenumber1, :housenumber_kana1, :mansion1, :mansion_kana1, :postalcode2, :prefecture2, :prefecture_kana2, :municipalities2, :municipalities_kana2, :housenumber2, :housenumber_kana2, :mansion2, :mansion_kana2, :p_name, :j_name, :h_name, :u_name, :pic)";
             $stmtInsert = $db->prepare($sqlInsert);
 
-            $stmtInsert->bindValue(':id', $id);
-            $stmtInsert->bindValue(':name', $name);
-            $stmtInsert->bindValue(':name_kana', $name_kana);
-            $stmtInsert->bindValue(':birthday', $birthday);
-            $stmtInsert->bindValue(':age', $age);
-            $stmtInsert->bindValue(':gender', $gender);
-            $stmtInsert->bindValue(':email', $email);
-            $stmtInsert->bindValue(':tel1', $tel1);
-            $stmtInsert->bindValue(':tel2', $tel2);
-            $stmtInsert->bindValue(':tel3', $tel3);
-            $stmtInsert->bindValue(':postalcode1', $postalcode1);
-            $stmtInsert->bindValue(':prefecture1', $prefecture1);
-            $stmtInsert->bindValue(':prefecture_kana1', $prefecture_kana1);
-            $stmtInsert->bindValue(':municipalities1', $municipalities1);
-            $stmtInsert->bindValue(':municipalities_kana1', $municipalities_kana1);
-            $stmtInsert->bindValue(':housenumber1', $housenumber1);
-            $stmtInsert->bindValue(':housenumber_kana1', $housenumber_kana1);
-            $stmtInsert->bindValue(':mansion1', $mansion1);
-            $stmtInsert->bindValue(':mansion_kana1', $mansion_kana1);
-            $stmtInsert->bindValue(':postalcode2', $postalcode2);
-            $stmtInsert->bindValue(':prefecture2', $prefecture2);
-            $stmtInsert->bindValue(':prefecture_kana2', $prefecture_kana2);
-            $stmtInsert->bindValue(':municipalities2', $municipalities2);
-            $stmtInsert->bindValue(':municipalities_kana2', $municipalities_kana2);
-            $stmtInsert->bindValue(':housenumber2', $housenumber2);
-            $stmtInsert->bindValue(':housenumber_kana2', $housenumber_kana2);
-            $stmtInsert->bindValue(':mansion2', $mansion2);
-            $stmtInsert->bindValue(':mansion_kana2', $mansion_kana2);
-            $stmtInsert->bindValue(':p_name', $p_name);
-            $stmtInsert->bindValue(':j_name', $j_name);
-            $stmtInsert->bindValue(':h_name', $h_name);
-            $stmtInsert->bindValue(':u_name', $u_name);
-            $stmtInsert->bindValue(':pic', $pic);
+            $stmtInsert->bindValue(':id', $id, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':name', $name, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':name_kana', $name_kana, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':birthday', $birthday, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':age', $age, PDO::PARAM_INT);
+            $stmtInsert->bindValue(':gender', $gender, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':email', $email, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':tel1', $tel1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':tel2', $tel2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':tel3', $tel3, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':postalcode1', $postalcode1, PDO::PARAM_INT);
+            $stmtInsert->bindValue(':prefecture1', $prefecture1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':prefecture_kana1', $prefecture_kana1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':municipalities1', $municipalities1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':municipalities_kana1', $municipalities_kana1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':housenumber1', $housenumber1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':housenumber_kana1', $housenumber_kana1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':mansion1', $mansion1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':mansion_kana1', $mansion_kana1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':postalcode2', $postalcode2, PDO::PARAM_INT);
+            $stmtInsert->bindValue(':prefecture2', $prefecture2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':prefecture_kana2', $prefecture_kana2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':municipalities2', $municipalities2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':municipalities_kana2', $municipalities_kana2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':housenumber2', $housenumber2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':housenumber_kana2', $housenumber_kana2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':mansion2', $mansion2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':mansion_kana2', $mansion_kana2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':p_name', $p_name, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':j_name', $j_name, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':h_name', $h_name, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':u_name', $u_name, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':pic', $pic, PDO::PARAM_INT);
 
-            $stmtInsert->execute();
+            $stmtInsert->execute([$name,$name_kana, $birthday, $age, $gender, $email, $tel1, $tel2, $tel3, $postalcode1,$prefecture1,$prefecture_kana1,$municipalities1,$municipalities_kana1,$housenumber1,$housenumber_kana1,$mansion1,$mansion_kana1,$postalcode2,$prefecture2,$prefecture_kana2,$municipalities2,$municipalities_kana2,$housenumber2,$housenumber_kana2,$mansion2,$mansion_kana2,$p_name,$j_name,$h_name,$u_name]);
+
+            if (!$stmtInsert->execute()) {
+                print_r($stmtInsert->errorInfo());
+            }
+            
 
         }
-        $db->commit();
+        
  
 
-        unset($_SESSION['join']); // セッションを破棄
+        /*unset($_SESSION['join']); // セッションを破棄
         header('Location: check.php'); 
-        exit();
+        exit();*/
     } catch (PDOException $e) {
         $error = "error"; // エラーが発生した場合
         $db->rollback(); // ロールバック
@@ -108,8 +129,8 @@ if (!empty($_POST['check'])) {
     }
 }
 
-$sql = "SELECT * FROM rirekisho WHERE id = :id";
-$stmt = $db->prepare($sql);
+$sqlmul = "SELECT * FROM rirekisho WHERE id = :id";
+$stmt = $db->prepare($sqlmul);
 $stmt->bindValue(':id', $id);
 $stmt->execute();
 $member = $stmt->fetch();
@@ -191,7 +212,7 @@ if(!empty($_POST)){
 </head>
 <body>
     <div class="content">
-        <form action="" method="POST">
+        <form action="check.php" method="POST">
         <div class="header">
     <h1>就職活動支援サイト JOB SUPPORT</h1>
     <a href="toppage.php">
@@ -201,7 +222,7 @@ if(!empty($_POST)){
     <a href="sikaku.php">資格登録</a> |
     <a href="mail/index.php">メール</a> |
     <a href="todolist/todolist.php">To do</a> |
-    <a href="#">カレンダー</a>
+    <a href="calendar.php">カレンダー</a>
   </div>
             <h1 class="index">プロフィール登録</h1>
             <p>サービス利用のため下記フォームに詳細なプロフィール及び学歴を入力してください。</p>
@@ -618,11 +639,6 @@ if(!empty($_POST)){
                             <button type="submit" class="btn next-btn" onclick="redirectToCheck()">確認画面へ進む</button>
                                 <div class="clear"></div>
 
-                                <script>
-                                function redirectToCheck() {
-                                    window.location.href = "check.php";
-                                }
-                                </script>
                 </div>
 
                         

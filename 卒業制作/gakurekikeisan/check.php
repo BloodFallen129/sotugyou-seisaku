@@ -3,10 +3,10 @@ require_once("./dbconnect.php");
 session_start();
 
 /* 会員登録の手続き以外のアクセスを飛ばす */
-if (!isset($_SESSION['join'])) {
+/*if (!isset($_SESSION['join'])) {
     header('Location: entry.php');
     exit();
-}
+}*/
 
 //
 
@@ -69,7 +69,7 @@ if (!empty($_POST['check'])) {
         <form action="" method="POST">
             <input type="hidden" name="check" value="checked">
             <div class="content">
-   <form action="" method="POST">
+   <form action="check.php" method="POST">
     <div class="header">
         <h1>就職活動支援サイト JOB SUPPORT</h1>
             <a href="toppage.php">
