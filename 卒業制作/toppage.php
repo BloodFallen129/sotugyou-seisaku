@@ -94,17 +94,11 @@
     <a href="toppage.php">
     <img src="image/jobsupport2.png" alt="Job Support" class="logo">
   </a>
-    <a href="#">履歴書作成</a> |
+    <a href="gakurekikeisan/entry.php">履歴書作成</a> |
     <a href="sikaku.php">資格登録</a> |
-<<<<<<< HEAD
     <a href="mail/index.php">メール</a> |
     <a href="todolist/todolist.php">To do</a> |
     <a href="calendar.php">カレンダー</a>
-=======
-    <a href="#">メール</a> |
-    <a href="#">To do</a> |
-    <a href="#">カレンダー</a>
->>>>>>> 90c2b8f7c19541532fe19b401bb4bef73f7f9c72
   </div>
 
   <div class="container">
@@ -112,10 +106,6 @@
     <?php
       echo $message;
     ?>
-<<<<<<< HEAD
-
-=======
->>>>>>> 90c2b8f7c19541532fe19b401bb4bef73f7f9c72
   </span>
 </div>
 </body>
