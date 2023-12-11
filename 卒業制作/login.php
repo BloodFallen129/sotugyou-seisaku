@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-image: url(image/texture-background.jpg);
+      background-image: url(image/sora.jpg);
       background-size: cover;
     }
 
