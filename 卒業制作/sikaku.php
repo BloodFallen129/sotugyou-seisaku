@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>アバター成長サイト</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
   <style>
     /* カスタムスタイルの追加 */
@@ -13,29 +16,68 @@
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f5f5f5;
+      /* background-image: url(image/syukatu2.jpg); */
+      /* background-repeat: no-repeat; */
+      /* background-size: cover; */
+      background-color: aliceblue;
+      
     }
-    .header {
-  background-color: #007bff;
-  color: #fff;
+
+.header {
+  background-color: #f2f4f5;
+  color: #a06969;
   padding: 20px 0;
+  padding-top: 0px;
+  top: 0;
   text-align: center;
+  background-image: url(image/DC4DCA11-4EE7-449A-869F-2D847E657C60.jpg);
+  background-size:cover;  
+  
+  
+  /* background-image: url(image/avatar3.jpg); */
+  
+  
+  
+  /* align-items: center; */
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  /* font-family: 'Mochiy Pop P One', sans-serif; */
+  /* font-family: 'Noto Serif JP', serif; */
+
 }
 
 .header a {
-  color: #fff;
+  color: #896363;
   text-decoration: none;
   margin: 0 15px;
   font-weight: bold;
+  align-items: center;
+  text-align: center;
+  
 }
 
+h1 {
+      text-align: center;
+      margin-bottom: 0px;
+      color: #443a3a;
+      margin-top: 0;
+      
+      
+      
+    }
+
 .logo {
-  width: 200px;
-  height: auto;
-  position: absolute;
-  top: -20px; /* 画像を上に10px移動 */
-  left: 10px;
+  width: 170px;
+  height: 60px;
 }
+
+
+.anker {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      
+    }
     .container {
       max-width: 800px;
       margin: 20px auto;
@@ -144,16 +186,38 @@
 <body>
 <div class="header">
     <h1>就職活動支援サイト JOB SUPPORT</h1>
-    <a href="toppage.php">
-    <img src="image/jobsupport2.png" alt="Job Support" class="logo">
-  </a>
-  <a href="gakurekikeisan/entry.php">履歴書作成</a> |
-    <a href="sikaku.php">資格登録</a> |
-    <a href="mail/index.php">メール</a> |
-    <a href="todolist/todolist.php">To do</a> |
-    <a href="calendar.php">カレンダー</a>
+    
+    <div class="oya">
+      <a href="toppage.php">
+      <img src="image/jobsupport-3.png" alt="Job Support" class="logo">
+      </a>
+    </div>
+
+    
+
+    <div class="anker">
+       <a href="gakurekikeisan/entry.php" class="anker"><span class="material-symbols-outlined">
+        draw
+        </span>履歴書作成</a> |
+
+       <a href="sikaku.php" class="anker"><span class="material-symbols-outlined">
+        content_paste_go
+        </span>資格登録</a> |
+
+       <a href="mail/index.php" class="anker"><span class="material-symbols-outlined">
+        mail
+        </span>メール</a> |
+
+       <a href="todolist/todolist.php" class="anker"><span class="material-symbols-outlined">
+        check_circle
+        </span>To do</a> |
+        
+       <a href="calendar.php" class="anker"><span class="material-symbols-outlined">
+        calendar_month
+       </span>カレンダー</a>
+    </div>
   </div>
-<audio id="levelUpSound">
+  <audio id="levelUpSound">
   <source src="image/lvup.mp3" type="audio/mpeg">
   </audio>
   <div class="container">
@@ -272,4 +336,3 @@ function registerQualification() {
 </script>
 </body>
 </html>
-

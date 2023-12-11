@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アバター成長サイト</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .avatar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .avatar img {
+      max-width: 200px;
+      border-radius: 50%;
+    }
+
+    #experience {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="avatar">
+      <img id="avatarImage" src="initial_avatar.png" alt="アバター">
+    </div>
+    
+    <div id="experience">
+      経験値: <span id="experienceValue">0</span>
+    </div>
+    
+    <button onclick="gainExperience()">資格を取得して経験値を獲得</button>
+  </div>
+
+  <script>
+    let experience = 0;
+
+    function gainExperience() {
+      experience += 100; // 資格を取得した場合、経験値を増やす（ここでは仮に100としています）
+      document.getElementById("experienceValue").textContent = experience;
+
+      // 経験値に応じてアバターの成長段階を変更（仮の成長段階です）
+      if (experience >= 300) {
+        document.getElementById("avatarImage").src = "avatar_stage3.png";
+      } else if (experience >= 200) {
+        document.getElementById("avatarImage").src = "avatar_stage2.png";
+      }
+    }
+  </script>
+</body>
+</html>

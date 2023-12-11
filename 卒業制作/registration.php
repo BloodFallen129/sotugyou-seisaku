@@ -108,6 +108,6 @@ $connection->close();
         <input type="text" id="name" name="name" required>
   
         <button type="submit">登録</button>
-        <button onclick="window.location.href='index.php'">戻る</button>
+        <button onclick="window.location.href='login.php'">戻る</button>
 </form>
 

@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $student_id = $_POST["student_id"];
   $password = $_POST["password"];
 
-  $query = "SELECT * FROM user WHERE student_id = '$student_id'";
+  $query = "SELECT * FROM users WHERE student_id = '$student_id'";
   $result = $connection->query($query);
 
   if ($result->num_rows > 0) {
@@ -37,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $connection->close();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -54,23 +53,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-image: url(image/texture-background.jpg);
-      background-size: cover;
     }
 
     .login-container {
       max-width: 400px;
       background-color: #fff;
-      padding: 20px 50px 20px 20px;
+      padding: 20px;
       border-radius: 5px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-      
-      
     }
 
     label {
       font-weight: bold;
-      margin-right:30px
     }
 
     input {
@@ -79,7 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       margin-bottom: 10px;
       border: 1px solid #ccc;
       border-radius: 3px;
-      margin-right: 30px;
     }
 
     button {
@@ -98,33 +91,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       color: red;
       margin-top: 10px
     }
-
-    .job{
-      width: 200px;
-    }
-
-    .parent{
-      text-align: center;
-    }
-
-    h2{
-      margin: 0;
-    }
-
-
   </style>
 </head>
 <body>
   <div class="login-container">
-    <div class="parent">
-      <img class="job" src="image/jobsupport2.png" alt="">
-    <h2>就活生用ログイン</h2>
-    </div>
+    <h2>ログイン</h2>
     <form id="loginForm" method="post" action="login.php">
-      <label for="student_id">学籍番号</label>
+      <label for="student_id">学籍番号:</label>
       <input type="text" id="student_id" name="student_id" required>
   
-      <label for="password">パスワード</label>
+      <label for="password">パスワード:</label>
       <input type="password" id="password" name="password" required>
   
       <?php if (isset($error_message)) : ?>
@@ -139,7 +115,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form method="post" action="registration.php">
       <p>新規登録は <a href="registration.php">こちら</a></p>
     </form>
-</div>
   </div>
 </body>
+</html>
+
+
+
 
