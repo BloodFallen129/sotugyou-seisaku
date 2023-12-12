@@ -23,7 +23,7 @@
     <script>
         var calendar = null;
         var today = new Date(); // 今日の日付を取得
-        var selectedLocale = 'ja'; // デフォルトのロケール（日本語）
+        var selectedLocale = 'ja';
 
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
