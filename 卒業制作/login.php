@@ -67,8 +67,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       padding: 20px 50px 20px 20px;
       border-radius: 5px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-      
-      
     }
 
     label {
@@ -126,10 +124,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form id="loginForm" method="post" action="login.php">
       <label for="student_id">学籍番号</label>
       <input type="text" id="student_id" name="student_id" required>
-  
+
       <label for="password">パスワード</label>
       <input type="password" id="password" name="password" required>
-  
+
       <?php if (isset($error_message)) : ?>
   <p class="error-message"><?php echo $error_message; ?></p>
 <?php endif; ?>
