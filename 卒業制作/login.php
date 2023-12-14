@@ -5,10 +5,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $username = "root";
   $password = "";
   $dbname = "users_db"; // 作成したデータベース名
-  
+
   // データベースに接続
   $connection = new mysqli($hostname, $username, $password, $dbname);
-  
+
   if ($connection->connect_error) {
     die("データベースに接続できませんでした: " . $connection->connect_error);
   }
@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $user_password = $_POST["password"]; // Rename to avoid conflict with database password
   $hashed_password = password_hash($user_password, PASSWORD_DEFAULT);
   // データベースへの登録時に $hashed_password を挿入する
-  
 
   $query = "SELECT * FROM user WHERE student_id = '$student_id'";
   $result = $connection->query($query);
