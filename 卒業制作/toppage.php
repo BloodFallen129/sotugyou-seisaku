@@ -1,13 +1,12 @@
 <?php
-    session_start(); // セッションを開始
-    if (isset($_SESSION["user_name"])) {
-      $user_name = $_SESSION["user_name"];
-      $message = "ようこそ、{$user_name}さん";
-    } else {
-      $message = "セッションエラー";
-    }
-?>
+session_start(); // セッションを開始
 
+$message = "セッションエラー";
+if (isset($_SESSION["user_name"])) {
+    $user_name = $_SESSION["user_name"];
+    $message = "ようこそ、{$user_name}さん";
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -236,9 +235,7 @@ h1 {
      
     <div class="container">
       <h1>ホーム</h1>
-      
-    
-    
+      <?php echo $message; ?>
   </div>
 
 
