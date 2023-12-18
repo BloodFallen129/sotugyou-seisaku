@@ -20,56 +20,87 @@ session_start();
 $error = '';
 
 // フォームデータの取得
-$id = isset($_SESSION['join']['id']) ? $_SESSION['join']['id'] : null;
-$name = isset($_SESSION['join']['name']) ? $_SESSION['join']['name'] : null;
-$name_kana = isset($_SESSION['join']['name_kana']) ? $_SESSION['join']['name_kana'] : null;
-$birthday = isset($_SESSION['join']['birthday']) ? $_SESSION['join']['birthday'] : null;
-$age = isset($_SESSION['join']['age']) ? $_SESSION['join']['age'] : null;
-$gender = isset($_SESSION['join']['gender']) ? $_SESSION['join']['gender'] : null;
-$email = isset($_SESSION['join']['email']) ? $_SESSION['join']['email'] : null;
-$tel1 = isset($_SESSION['join']['tel1']) ? $_SESSION['join']['tel1'] : null;
-$tel2 = isset($_SESSION['join']['tel2']) ? $_SESSION['join']['tel2'] : null;
-$tel3 = isset($_SESSION['join']['tel3']) ? $_SESSION['join']['tel3'] : null;
-$postalcode1 = isset($_SESSION['join']['postalcode1']) ? $_SESSION['join']['postalcode1'] : null;
-$prefecture1 = isset($_SESSION['join']['prefecture1']) ? $_SESSION['join']['prefecture1'] : null;
-$prefecture_kana1 = isset($_SESSION['join']['prefecture_kana1']) ? $_SESSION['join']['prefecture_kana1'] : null;
-$address1 = isset($_SESSION['join']['address1']) ? $_SESSION['join']['address1'] : null;
-$address_kana1 = isset($_SESSION['join']['address_kana1']) ? $_SESSION['join']['address_kana1'] : null;
-$postalcode2 = isset($_SESSION['join']['postalcode2']) ? $_SESSION['join']['postalcode2'] : null;
-$prefecture2 = isset($_SESSION['join']['prefecture2']) ? $_SESSION['join']['prefecture2'] : null;
-$prefecture_kana2 = isset($_SESSION['join']['prefecture_kana2']) ? $_SESSION['join']['prefecture_kana2'] : null;
-$address2 = isset($_SESSION['join']['address2']) ? $_SESSION['join']['address2'] : null;
-$address_kana2 = isset($_SESSION['join']['address_kana2']) ? $_SESSION['join']['address_kana2'] : null;
-$p_name = isset($_SESSION['join']['p_name']) ? $_SESSION['join']['p_name'] : null;
-$j_name = isset($_SESSION['join']['j_name']) ? $_SESSION['join']['j_name'] : null;
-$h_name = isset($_SESSION['join']['h_name']) ? $_SESSION['join']['h_name'] : null;
-$u_name = isset($_SESSION['join']['u_name']) ? $_SESSION['join']['u_name'] : null;
-$pic = isset($_SESSION['join']['pic']) ? $_SESSION['join']['pic'] : null;
+$id = isset($_POST['id']) ? $_POST['id'] :'';
+$name = isset($_POST['name']) ? $_POST['name'] :'';
+$name_kana = isset($_POST['name_kana']) ? $_POST['name_kana'] :'';
+$birthday = isset($_POST['birthday']) ? $_POST['birthday'] :'';
+$age = isset($_POST['age']) ? $_POST['age'] :'';
+$gender = isset($_POST['gender']) ? $_POST['gender'] :'';
+$email = isset($_POST['email']) ? $_POST['email'] :'';
+$tel1 = isset($_POST['tel1']) ? $_POST['tel1'] :'';
+$tel2 = isset($_POST['tel2']) ? $_POST['tel2'] :'';
+$tel3 = isset($_POST['tel3']) ? $_POST['tel3'] :'';
+$postalcode1 = isset($_POST['postalcode1']) ? $_POST['postalcode1'] :'';
+$prefecture1 = isset($_POST['prefecture1']) ? $_POST['prefecture1'] :'';
+$prefecture_kana1 = isset($_POST['prefecture_kana1']) ? $_POST['prefecture_kana1'] :'';
+$address1 = isset($_POST['address1']) ? $_POST['address1'] :'';
+$address_kana1 = isset($_POST['address_kana1']) ? $_POST['address_kana1'] :'';
+
+$postalcode2 = isset($_POST['postalcode2']) ? $_POST['postalcode2'] :'';
+$prefecture2 = isset($_POST['prefecture2']) ? $_POST['prefecture2'] :'';
+$prefecture_kana2 = isset($_POST['prefecture_kana2']) ? $_POST['prefecture_kana2'] :'';
+$address2 = isset($_POST['address2']) ? $_POST['address2'] :'';
+$address_kana2 = isset($_POST['address_kana2']) ? $_POST['address_kana2'] :'';
+
+$p_name = isset($_POST['p_name']) ? $_POST['p_name'] :'';
+$p_year = isset($_POST['p_year']) ? $_POST['p_year'] :'';
+$j_name = isset($_POST['j_name']) ? $_POST['j_name'] :'';
+$j_year = isset($_POST['j_year']) ? $_POST['j_year'] :'';
+$h_name = isset($_POST['h_name']) ? $_POST['h_name'] :'';
+$h_year = isset($_POST['h_year']) ? $_POST['h_year'] :'';
+$u_name = isset($_POST['u_name']) ? $_POST['u_name'] :'';
+$u_year = isset($_POST['u_year']) ? $_POST['u_year'] :'';
+
+$pic = isset($_POST['pic']) ? $_POST['pic'] :'';
 
 // フォームが送信された場合
+
 if (!empty($_POST['check'])) {
     try {
-        // トランザクション開始
         $db->beginTransaction();
 
-        // 学籍番号の重複チェック
         $sqlSelect = "SELECT * FROM rirekisho WHERE id = :id";
         $stmtSelect = $db->prepare($sqlSelect);
         $stmtSelect->bindValue(':id', $id);
         $stmtSelect->execute();
         $member = $stmtSelect->fetch();
-
+        
         if ($member !== false && $member['id'] === $id) {
             echo 'この学籍番号は既に登録されています。';
         } else {
-            // データベースへの挿入処理
             $sqlInsert = "INSERT INTO rirekisho(id, name, name_kana, birthday, age, gender, email, tel1, tel2, tel3, postalcode1, prefecture1, prefecture_kana1, address1, address_kana1, postalcode2, prefecture2, prefecture_kana2, address2, address_kana2, p_name, p_year, j_name, j_year, h_name, h_year, u_name, u_year, pic) VALUES (:id, :name, :name_kana, :birthday, :age, :gender, :email, :tel1, :tel2, :tel3, :postalcode1, :prefecture1, :prefecture_kana1, :address1, :address_kana1, :postalcode2, :prefecture2, :prefecture_kana2, :address2, :address_kana2, :p_name, :p_year, :j_name, :j_year, :h_name, :h_year, :u_name, :u_year, :pic)";
             $stmtInsert = $db->prepare($sqlInsert);
 
             // バインド
             $stmtInsert->bindValue(':id', $id, PDO::PARAM_STR);
             $stmtInsert->bindValue(':name', $name, PDO::PARAM_STR);
-            // 他のフィールドのバインドも同様に行う
+            $stmtInsert->bindValue(':name_kana', $name_kana, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':birthday', $birthday, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':age', $age, PDO::PARAM_INT);
+            $stmtInsert->bindValue(':gender', $gender, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':email', $email, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':tel1', $tel1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':tel2', $tel2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':tel3', $tel3, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':postalcode1', $postalcode1, PDO::PARAM_INT);
+            $stmtInsert->bindValue(':prefecture1', $prefecture1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':prefecture_kana1', $prefecture_kana1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':address1', $address1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':address_kana1', $address_kana1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':postalcode2', $postalcode2, PDO::PARAM_INT);
+            $stmtInsert->bindValue(':prefecture2', $prefecture2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':prefecture_kana2', $prefecture_kana2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':address2', $address2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':address_kana2', $address_kana2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':p_name', $p_name, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':p_year', $p_year, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':j_name', $j_name, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':j_year', $j_year, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':h_name', $h_name, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':h_year', $h_year, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':u_name', $u_name, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':u_year', $u_year, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':pic', $pic, PDO::PARAM_INT);
 
             // 実行
             $stmtInsert->execute();
@@ -93,10 +124,10 @@ if (!empty($_POST['check'])) {
     }
 }
 
+
 // 以下はフォームのHTMLなどが続く部分
 // エラーがあればエラーメッセージを表示するなどの処理を行う
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -484,7 +515,7 @@ if (!empty($_POST['check'])) {
 
                         <div class="control">
                             <button type="submit" name = "submit" class="btn next-btn" onclick="redirectToCheck()">確認画面へ進む</button>
-                                <div class="clear"></div>
+                        </div>
 
                 </div>
 
