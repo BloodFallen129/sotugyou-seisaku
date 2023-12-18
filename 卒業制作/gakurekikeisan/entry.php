@@ -36,21 +36,13 @@ $tel3 = isset($_SESSION['join']['tel3']) ? $_SESSION['join']['tel3'] : null;
 $postalcode1 = isset($_SESSION['join']['postalcode1']) ? $_SESSION['join']['postalcode1'] : null;
 $prefecture1 = isset($_SESSION['join']['prefecture1']) ? $_SESSION['join']['prefecture1'] : null;
 $prefecture_kana1 = isset($_SESSION['join']['prefecture_kana1']) ? $_SESSION['join']['prefecture_kana1'] : null;
-$municipalities1 = isset($_SESSION['join']['municipalities1']) ? $_SESSION['join']['municipalities1'] : null;
-$municipalities_kana1 = isset($_SESSION['join']['municipalities_kana1']) ? $_SESSION['join']['municipalities_kana1'] : null;
-$housenumber1 = isset($_SESSION['join']['housenumber1']) ? $_SESSION['join']['housenumber1'] : null;
-$housenumber_kana1 = isset($_SESSION['join']['housenumber_kana1']) ? $_SESSION['join']['housenumber_kana1'] : null;
-$mansion1 = isset($_SESSION['join']['mansion1']) ? $_SESSION['join']['mansion1'] : null;
-$mansion_kana1 = isset($_SESSION['join']['mansion_kana1']) ? $_SESSION['join']['mansion_kana1'] : null;
+$address1 = isset($_SESSION['join']['address1']) ? $_SESSION['join']['address1'] : null;
+$address_kana1 = isset($_SESSION['join']['address_kana1']) ? $_SESSION['join']['address_kana1'] : null;
 $postalcode2 = isset($_SESSION['join']['postalcode2']) ? $_SESSION['join']['postalcode2'] : null;
 $prefecture2 = isset($_SESSION['join']['prefecture2']) ? $_SESSION['join']['prefecture2'] : null;
 $prefecture_kana2 = isset($_SESSION['join']['prefecture_kana2']) ? $_SESSION['join']['prefecture_kana2'] : null;
-$municipalities2 = isset($_SESSION['join']['municipalities2']) ? $_SESSION['join']['municipalities2'] : null;
-$municipalities_kana2 = isset($_SESSION['join']['municipalities_kana2']) ? $_SESSION['join']['municipalities_kana2'] : null;
-$housenumber2 = isset($_SESSION['join']['housenumber2']) ? $_SESSION['join']['housenumber2'] : null;
-$housenumber_kana2 = isset($_SESSION['join']['housenumber_kana2']) ? $_SESSION['join']['housenumber_kana2'] : null;
-$mansion2 = isset($_SESSION['join']['mansion2']) ? $_SESSION['join']['mansion2'] : null;
-$mansion_kana2 = isset($_SESSION['join']['mansion_kana2']) ? $_SESSION['join']['mansion_kana2'] : null;
+$address2 = isset($_SESSION['join']['address2']) ? $_SESSION['join']['address2'] : null;
+$address_kana2 = isset($_SESSION['join']['address_kana2']) ? $_SESSION['join']['address_kana2'] : null;
 $p_name = isset($_SESSION['join']['p_name']) ? $_SESSION['join']['p_name'] : null;
 $j_name = isset($_SESSION['join']['j_name']) ? $_SESSION['join']['j_name'] : null;
 $h_name = isset($_SESSION['join']['h_name']) ? $_SESSION['join']['h_name'] : null;
@@ -59,19 +51,19 @@ $pic = isset($_SESSION['join']['pic']) ? $_SESSION['join']['pic'] : null;
 
 if (!empty($_POST['check'])) {
     try {
-        $db->beginTransaction();
+        $db->rollback();
 
         $sqlSelect = "SELECT * FROM rirekisho WHERE id = :id";
         $stmtSelect = $db->prepare($sqlSelect);
         $stmtSelect->bindValue(':id', $id);
         $stmtSelect->execute();
         $member = $stmtSelect->fetch();
-        $db->commit();
+        $db->rollback();
 
         if ($member !== false && $member['id'] === $id) {
             echo 'この学籍番号は既に登録されています。';
         } else {
-            $sqlInsert = "INSERT INTO rirekisho(id, name, name_kana, birthday, age, gender, email, tel1, tel2, tel3, postalcode1, prefecture1, prefecture_kana1, municipalities1, municipalities_kana1, housenumber1, housenumber_kana1, mansion1, mansion_kana1, postalcode2, prefecture2, prefecture_kana2, municipalities2, municipalities_kana2, housenumber2, housenumber_kana2, mansion2, mansion_kana2, p_name, j_name, h_name, u_name, pic) VALUES (:id, :name, :name_kana, :birthday, :age, :gender, :email, :tel1, :tel2, :tel3, :postalcode1, :prefecture1, :prefecture_kana1, :municipalities1, :municipalities_kana1, :housenumber1, :housenumber_kana1, :mansion1, :mansion_kana1, :postalcode2, :prefecture2, :prefecture_kana2, :municipalities2, :municipalities_kana2, :housenumber2, :housenumber_kana2, :mansion2, :mansion_kana2, :p_name, :j_name, :h_name, :u_name, :pic)";
+            $sqlInsert = "INSERT INTO rirekisho(id, name, name_kana, birthday, age, gender, email, tel1, tel2, tel3, postalcode1, prefecture1, prefecture_kana1, address1, address_kana1, postalcode2, prefecture2, prefecture_kana2, address2,address_kana2, p_name, p_year, j_name, j_year, h_name, h_year, u_name, u_year, pic) VALUES (:id, :name, :name_kana, :birthday, :age, :gender, :email, :tel1, :tel2, :tel3, :postalcode1, :prefecture1, :prefecture_kana1, :address1, :address_kana1, :postalcode2, :prefecture2, :prefecture_kana2, :address2, :address_kana2, :p_name, :p_year, :j_name, :j_year, :h_name, :h_year, :u_name, :u_year, :pic)";
             $stmtInsert = $db->prepare($sqlInsert);
 
             $stmtInsert->bindValue(':id', $id, PDO::PARAM_STR);
@@ -87,28 +79,20 @@ if (!empty($_POST['check'])) {
             $stmtInsert->bindValue(':postalcode1', $postalcode1, PDO::PARAM_INT);
             $stmtInsert->bindValue(':prefecture1', $prefecture1, PDO::PARAM_STR);
             $stmtInsert->bindValue(':prefecture_kana1', $prefecture_kana1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':municipalities1', $municipalities1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':municipalities_kana1', $municipalities_kana1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':housenumber1', $housenumber1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':housenumber_kana1', $housenumber_kana1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':mansion1', $mansion1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':mansion_kana1', $mansion_kana1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':address1', $address1, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':address_kana1', $address_kana1, PDO::PARAM_STR);
             $stmtInsert->bindValue(':postalcode2', $postalcode2, PDO::PARAM_INT);
             $stmtInsert->bindValue(':prefecture2', $prefecture2, PDO::PARAM_STR);
             $stmtInsert->bindValue(':prefecture_kana2', $prefecture_kana2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':municipalities2', $municipalities2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':municipalities_kana2', $municipalities_kana2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':housenumber2', $housenumber2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':housenumber_kana2', $housenumber_kana2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':mansion2', $mansion2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':mansion_kana2', $mansion_kana2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':address2', $municipalities2, PDO::PARAM_STR);
+            $stmtInsert->bindValue(':address_kana2', $mansion_kana2, PDO::PARAM_STR);
             $stmtInsert->bindValue(':p_name', $p_name, PDO::PARAM_STR);
             $stmtInsert->bindValue(':j_name', $j_name, PDO::PARAM_STR);
             $stmtInsert->bindValue(':h_name', $h_name, PDO::PARAM_STR);
             $stmtInsert->bindValue(':u_name', $u_name, PDO::PARAM_STR);
             $stmtInsert->bindValue(':pic', $pic, PDO::PARAM_INT);
 
-            $stmtInsert->execute([$name,$name_kana, $birthday, $age, $gender, $email, $tel1, $tel2, $tel3, $postalcode1,$prefecture1,$prefecture_kana1,$municipalities1,$municipalities_kana1,$housenumber1,$housenumber_kana1,$mansion1,$mansion_kana1,$postalcode2,$prefecture2,$prefecture_kana2,$municipalities2,$municipalities_kana2,$housenumber2,$housenumber_kana2,$mansion2,$mansion_kana2,$p_name,$j_name,$h_name,$u_name]);
+            $stmtInsert->execute([$name,$name_kana, $birthday, $age, $gender, $email, $tel1, $tel2, $tel3, $postalcode1,$prefecture1,$prefecture_kana1,$adress1,$address_kana1,$postalcode2,$prefecture2,$prefecture_kana2,$address2,$address_kana2,$p_name,$j_name,$h_name,$u_name]);
 
             if (!$stmtInsert->execute()) {
                 print_r($stmtInsert->errorInfo());
@@ -171,20 +155,11 @@ if(!empty($_POST)){
     if($_POST['prefecture1']===""){
         $error['prefecture1'] = "blank";
     }
-    if($_POST['municipalities1']===""){
-        $error['municipalities_kana1'] = "blank";
+    if($_POST['address1']===""){
+        $error['address1'] = "blank";
     }
-    if($_POST['housenumber1']===""){
-        $error['housenumber1'] = "blank";
-    }
-    if($_POST['housenumber_kana1']===""){
-        $error['housenumber_kana1'] = "blank";
-    }
-    if($_POST['mansion1']===""){
-        $error['mansion1'] = "blank";
-    }
-    if($_POST['mansion_kana1']===""){
-        $error['mansion_kana1'] = "blank";
+    if($_POST['address_kana1']===""){
+        $error['address_kana1'] = "blank";
     }
     if($_POST['p_name']===""){
         $error['p_name'] = "blank";
@@ -398,41 +373,17 @@ if(!empty($_POST)){
                         ];
                     ?>
                     <input type="text" id="prefecture_kana1" name="prefecture_kana1" readonly><br>
-                <label for="municipalities1">市区町村<span class="required"></span></label>
-                    <input type="text" id="municipalities1" name ="municipalities1">
-                    <?php if (!empty($error["municipalities1"]) && $error['municipalities1'] === 'blank'): ?>
+                <label for="address1">都道府県以降の住所<span class="required"></span></label>
+                    <input type="text" id="address1" name ="address1">
+                    <?php if (!empty($error["address1"]) && $error['address1'] === 'blank'): ?>
                     <p class="error">＊入力してください</p>
                     <?php endif ?>
 
-                <label for="municipalities_kana1">市区町村(ふりがな)<span class="required"></span></label>
-                    <input type="text" id="municipalities_kana1" name="municipalities_kana1"><br>
-                    <?php if (!empty($error["municipalities_kana1"]) && $error['municipalities_kana1'] === 'blank'): ?>
+                <label for="address_kana1">都道府県以降の住所(ふりがな)<span class="required"></span></label>
+                    <input type="text" id="address_kana1" name="address_kana1"><br>
+                    <?php if (!empty($error["address_kana1"]) && $error['address_kana1'] === 'blank'): ?>
                     <p class="error">＊入力してください</p>
                     <?php endif ?>
-
-                <label for="housenumber1">市区町村以下住所</label>
-                    <input id="housenumber1" id="housenumber1" name="housenumber1" ><br>
-                    <?php if (!empty($error["housenumber_kana1"]) && $error['housenumber_kana1'] === 'blank'): ?>
-                        <p class="error">＊入力してください</p>
-                        <?php endif?>
-
-                 <label for="housenumber_kana1">市区町村以下住所(ふりがな)</label>
-                    <input id="housenumber_kana1" id="housenumber_kana1" name="housenumber_kana1" ><br>
-                    <?php if (!empty($error["housenumber_kana1"]) && $error['housenumber_kana1'] === 'blank'): ?>
-                        <p class="error">＊入力してください</p>
-                        <?php endif?>
-
-                <label for="mansion1">建物名・部屋番号</label>
-                    <input id="mansion1" type="text" name ="mansion1" maxlength="255" required><br>
-                    <?php if (!empty($error["mansion1"]) && $error['mansion1'] === 'blank'): ?>
-                        <p class="error">＊入力してください</p>
-                        <?php endif?>
-
-                <label for="mansion1">建物名・部屋番号(ふりがな)</label>
-                    <input id="mansion_kana1" type="text" name ="mansion_kana1" maxlength="255" required><br>
-                    <?php if (!empty($error["mansion_kana1"]) && $error['mansion_kana1'] === 'blank'): ?>
-                        <p class="error">＊入力してください</p>
-                        <?php endif?>
 
 
             <label>帰省先等 住所</label>
@@ -550,9 +501,9 @@ if(!empty($_POST)){
                         ];
                     ?>
                     <input type="text" id="prefecture_kana2" name="prefecture_kana2" readonly><br>
-                <label for="municipalities2">市区町村</label>
-                    <input type="text" id="municipalities2" name ="municipalities2">
-                    <?php if (!empty($error["municipalities2"]) && $error['municipalitie21'] === 'blank'): ?>
+                    <label for="address2">都道府県以降の住所</label>
+                    <input type="text" id="address2" name ="address2">
+                    <?php if (!empty($error["address2"]) && $error['address2'] === 'blank'): ?>
                     <p class="error">＊入力してください</p>
                     <?php endif ?>
 
@@ -581,35 +532,11 @@ if(!empty($_POST)){
                         prefectureKanaInput2.readOnly = false;
                     </script>
 
-                <label for="municipalities_kana2">市区町村(ふりがな)</label>
-                    <input type="text" id="municipalities_kana2" name="municipalities_kana2"><br>
-                    <?php if (!empty($error["municipalities_kana2"]) && $error['municipalities_kana2'] === 'blank'): ?>
+                <label for="address_kana2">都道府県以降の住所(ふりがな)</label>
+                    <input type="text" id="address_kana2" name="address_kana2"><br>
+                    <?php if (!empty($error["address_kana2"]) && $error['address_kana2'] === 'blank'): ?>
                     <p class="error">＊入力してください</p>
                     <?php endif ?>
-
-                <label for="housenumber2">市区町村以下住所</label>
-                    <input id="housenumber2" id="housenumber2" name="housenumber2" ><br>
-                    <?php if (!empty($error["housenumber2"]) && $error['housenumber2'] === 'blank'): ?>
-                        <p class="error">＊入力してください</p>
-                        <?php endif?>
-            
-                <label for="housenumber_kana2">市区町村以下住所(ふりがな)</label>
-                    <input id="housenumber_kana2" id="housenumber_kana2" name="housenumber_kana2" ><br>
-                    <?php if (!empty($error["housenumber_kana2"]) && $error['housenumber_kana2'] === 'blank'): ?>
-                        <p class="error">＊入力してください</p>
-                        <?php endif?>
-
-                <label for="mansion2">建物名・部屋番号</label>
-                    <input id="mansion2" type="text" name ="mansion2" maxlength="255" ><br>
-                    <?php if (!empty($error["mansion2"]) && $error['mansion2'] === 'blank'): ?>
-                        <p class="error">＊入力してください</p>
-                        <?php endif?>
-
-                <label for="mansion_kana2">建物名・部屋番号(ふりがな)</label>
-                    <input id="mansion_kana2" type="text" name ="mansion_kana2" maxlength="255"><br>
-                    <?php if (!empty($error["mansion_kana2"]) && $error['mansion_kana2'] === 'blank'): ?>
-                        <p class="error">＊入力してください</p>
-                        <?php endif?>
 
                 <label for="p_name">小学校名</label>
                 <input id="p_name"  type="text" name="p_name" maxlength="255" required><br>

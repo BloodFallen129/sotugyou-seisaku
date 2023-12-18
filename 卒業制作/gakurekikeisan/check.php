@@ -1,20 +1,30 @@
 <?php
-require_once("./dbconnect.php");
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$hostname = "localhost";
+$username = "root";
+$password = "";
+$dbname = "gakureki";
+
+try{
+    $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
+}catch(PDOException $e){
+    echo "データベースエラー:" .$e->getMessage();
+}
+$sql = "SELECT * FROM `rirekisho`;";
+$sql = $db->prepare($sql);
+//require_once("./dbconnect.php");
 session_start();
 
-/* 会員登録の手続き以外のアクセスを飛ばす */
-/*if (!isset($_SESSION['join'])) {
-    header('Location: entry.php');
-    exit();
-}*/
-
-//
+// エラー変数を初期化
+$error = '';
 
 
 if (!empty($_POST['check'])) {
 
     // 入力情報をデータベースに登録
-    $statement = $db->prepare("INSERT INTO rirekisho SET id=?,name=?,name_kana=?,burthday=?,age=?,gender=?,email=?,tel1=?,tel2=?,tel3=?,postalcode1=?,prefecture1=?,prefecture_kana1=?,municipalities1=?,municipalities_kana1=?,housenumber1=?,housenumber_kana1=?,mansion1=?,mansion_kana1=?,postalcode2=?,prefecture2=?,prefecture_kana2=?,municipalities2=?,municipalities_kana2=?,housenumber2=?,housenumber_kana2=?,mansion2=?,mansion_kana2=?,p_name=?,j_name=?,h_name=?,u_name=?,pic=?");
+    $statement = $db->prepare("INSERT INTO rirekisho SET id=?,name=?,name_kana=?,burthday=?,age=?,gender=?,email=?,tel1=?,tel2=?,tel3=?,postalcode1=?,prefecture1=?,prefecture_kana1=?,address1=?,address_kana1=?,postalcode2=?,prefecture2=?,prefecture_kana2=?,address2=?,address_kana2=?,p_name=?,j_name=?,h_name=?,u_name=?,pic=?");
     $statement->execute(array(
         $_SESSION['join']['id'],
         $_SESSION['join']['name'],
@@ -29,21 +39,13 @@ if (!empty($_POST['check'])) {
         $_SESSION['join']['postalcode1'],
         $_SESSION['join']['prefecture1'],
         $_SESSION['join']['prefecture_kana1'],
-        $_SESSION['join']['municipalities1'],
-        $_SESSION['join']['municipalities_kana1'],
-        $_SESSION['join']['housenumber1'],
-        $_SESSION['join']['housenumber_kana1'],
-        $_SESSION['join']['mansion1'],
-        $_SESSION['join']['mansion_kana1'],
+        $_SESSION['join']['address1'],
+        $_SESSION['join']['address_kana1'],
         $_SESSION['join']['postalcode2'],
         $_SESSION['join']['prefecture2'],
         $_SESSION['join']['prefecture_kana2'],
-        $_SESSION['join']['municipalities2'],
-        $_SESSION['join']['municipalities_kana2'],
-        $_SESSION['join']['housenumber2'],
-        $_SESSION['join']['housenumber_kana2'],
-        $_SESSION['join']['mansion2'],
-        $_SESSION['join']['mansion_kana2'],
+        $_SESSION['join']['address2'],
+        $_SESSION['join']['address_kana2'],
         $_SESSION['join']['p_name'],
         $_SESSION['join']['j_name'],
         $_SESSION['join']['h_name'],
@@ -128,17 +130,11 @@ if (!empty($_POST['check'])) {
                 <p>都道府県(ふりがな):</p>
                 <p><?php echo htmlspecialchars($_SESSION['join']['prefecture_kana1'], ENT_QUOTES); ?></p>
 
-                <p>市区町村:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['municipalities1'], ENT_QUOTES); ?></p>
+                <p>都道府県名以降の住所:</p>
+                <p><?php echo htmlspecialchars($_SESSION['join']['address1'], ENT_QUOTES); ?></p>
 
-                <p>市区町村(ふりがな):</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['municipalities_kana1'], ENT_QUOTES); ?></p>
-
-                <p>建物名・部屋番号:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['mansion1'], ENT_QUOTES); ?></p>
-
-                <p>建物名・部屋番号(ふりがな):</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['mansion_kana1'], ENT_QUOTES); ?></p>
+                <p>都道府県名以降の住所(ふりがな):</p>
+                <p><?php echo htmlspecialchars($_SESSION['join']['address_kana1'], ENT_QUOTES); ?></p>
 
                 <br>
                 <p>帰省先等 住所に関して</p>
@@ -151,17 +147,12 @@ if (!empty($_POST['check'])) {
                 <p>都道府県(ふりがな):</p>
                 <p><?php echo htmlspecialchars($_SESSION['join']['prefecture_kana2'], ENT_QUOTES); ?></p>
 
-                <p>市区町村:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['municipalities2'], ENT_QUOTES); ?></p>
+                <p>都道府県名以降の住所:</p>
+                <p><?php echo htmlspecialchars($_SESSION['join']['address2'], ENT_QUOTES); ?></p>
 
-                <p>市区町村(ふりがな):</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['municipalities_kana2'], ENT_QUOTES); ?></p>
+                <p>都道府県以降の住所(ふりがな):</p>
+                <p><?php echo htmlspecialchars($_SESSION['join']['address_kana2'], ENT_QUOTES); ?></p>
 
-                <p>建物名・部屋番号:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['mansion2'], ENT_QUOTES); ?></p>
-
-                <p>建物名・部屋番号(ふりがな):</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['mansion_kana2'], ENT_QUOTES); ?></p>
 
                 <br>
                 <p>小学校名:</p>
