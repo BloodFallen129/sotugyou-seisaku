@@ -3,6 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <title>TODOリスト</title>
     <style>
         @import url('https://fonts.cdnfonts.com/css/bradley-hand-2');
@@ -17,28 +23,46 @@
           background-size: cover;
         }
 
-
         .header {
-          background-color: #007bff;
-          color: #fff;
-          padding: 20px 0;
-          text-align: center;
+        background-color: #f2f4f5;
+        color: #a06969;
+        padding: 20px 0;
+        padding-top: 0px;
+        top: 0;
+        text-align: center;
+        background-image: url(image/DC4DCA11-4EE7-449A-869F-2D847E657C60.jpg);
+        background-size: cover;
+        font-family: 'Zen Kaku Gothic New', sans-serif;
         }
 
         .header a {
-          color: #fff;
-          text-decoration: none;
-          margin: 0 15px;
-          font-weight: bold;
+        color: #896363;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+        align-items: center;
+        text-align: center;
+        }
+
+        h1 {
+        text-align: center;
+        margin-bottom: 0px;
+        color: #443a3a;
+        margin-top: 0;
         }
 
         .logo {
-          width: 200px;
-          height: auto;
-          position: absolute;
-          top: -20px; /* 画像を上に10px移動 */
-          left: 10px;
+        width: 170px;
+        height: 60px;
         }
+
+        .anker {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        
         
         
         main {
@@ -130,16 +154,38 @@
     </style>
 </head>
 <body>
-  <div class="header">
+<div class="header">
     <h1>就職活動支援サイト JOB SUPPORT</h1>
-    <a href="toppage.php">
-    <img src="image/jobsupport2.png" alt="Job Support" class="logo">
-  </a>
-    <a href="#">履歴書作成</a> |
-    <a href="#">資格登録</a> |
-    <a href="#">メール</a> |
-    <a href="#">To do</a> |
-    <a href="#">カレンダー</a>
+    
+    <div class="oya">
+      <a href="toppage.php">
+      <img src="image/jobsupport-3.png" alt="Job Support" class="logo">
+      </a>
+    </div>
+
+    
+
+    <div class="anker">
+       <a href="gakurekikeisan/entry.php" class="anker"><span class="material-symbols-outlined">
+        draw
+        </span>履歴書作成</a> |
+
+       <a href="sikaku.php" class="anker"><span class="material-symbols-outlined">
+        content_paste_go
+        </span>資格登録</a> |
+
+       <a href="mail/index.php" class="anker"><span class="material-symbols-outlined">
+        mail
+        </span>メール</a> |
+
+       <a href="todolist/todolist.php" class="anker"><span class="material-symbols-outlined">
+        check_circle
+        </span>To do</a> |
+        
+       <a href="calendar.php" class="anker"><span class="material-symbols-outlined">
+        calendar_month
+       </span>カレンダー</a>
+    </div>
   </div>
 
   <main>
