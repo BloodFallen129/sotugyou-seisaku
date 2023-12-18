@@ -5,10 +5,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $username = "root";
   $password = "";
   $dbname = "users_db"; // 作成したデータベース名
-  
+
   // データベースに接続
   $connection = new mysqli($hostname, $username, $password, $dbname);
-  
+
   if ($connection->connect_error) {
     die("データベースに接続できませんでした: " . $connection->connect_error);
   }
@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $user_password = $_POST["password"]; // Rename to avoid conflict with database password
   $hashed_password = password_hash($user_password, PASSWORD_DEFAULT);
   // データベースへの登録時に $hashed_password を挿入する
-  
 
   $query = "SELECT * FROM user WHERE student_id = '$student_id'";
   $result = $connection->query($query);
@@ -57,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-image: url(image/texture-background.jpg);
+      background-image: url(image/sora.jpg);
       background-size: cover;
     }
 
@@ -67,8 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       padding: 20px 50px 20px 20px;
       border-radius: 5px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-      
-      
     }
 
     label {
@@ -126,10 +123,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form id="loginForm" method="post" action="login.php">
       <label for="student_id">学籍番号</label>
       <input type="text" id="student_id" name="student_id" required>
-  
+
       <label for="password">パスワード</label>
       <input type="password" id="password" name="password" required>
-  
+
       <?php if (isset($error_message)) : ?>
   <p class="error-message"><?php echo $error_message; ?></p>
 <?php endif; ?>
@@ -146,5 +143,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </div>
 </body>
 </html>
-
-
