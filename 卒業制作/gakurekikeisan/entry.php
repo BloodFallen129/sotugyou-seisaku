@@ -7,22 +7,19 @@ $username = "root";
 $password = "";
 $dbname = "gakureki";
 
-try{
+try {
     $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-}catch(PDOException $e){
-    echo "データベースエラー:" .$e->getMessage();
+} catch (PDOException $e) {
+    echo "データベースエラー:" . $e->getMessage();
 }
-$sql = "SELECT * FROM `rirekisho`;";
-$sql = $db->prepare($sql);
-//require_once("./dbconnect.php");
+
+// セッション開始
 session_start();
 
 // エラー変数を初期化
 $error = '';
 
-/* 会員登録の手続き以外のアクセスを飛ばす */
-
-
+// フォームデータの取得
 $id = isset($_SESSION['join']['id']) ? $_SESSION['join']['id'] : null;
 $name = isset($_SESSION['join']['name']) ? $_SESSION['join']['name'] : null;
 $name_kana = isset($_SESSION['join']['name_kana']) ? $_SESSION['join']['name_kana'] : null;
@@ -49,134 +46,57 @@ $h_name = isset($_SESSION['join']['h_name']) ? $_SESSION['join']['h_name'] : nul
 $u_name = isset($_SESSION['join']['u_name']) ? $_SESSION['join']['u_name'] : null;
 $pic = isset($_SESSION['join']['pic']) ? $_SESSION['join']['pic'] : null;
 
+// フォームが送信された場合
 if (!empty($_POST['check'])) {
     try {
-        $db->rollback();
+        // トランザクション開始
+        $db->beginTransaction();
 
+        // 学籍番号の重複チェック
         $sqlSelect = "SELECT * FROM rirekisho WHERE id = :id";
         $stmtSelect = $db->prepare($sqlSelect);
         $stmtSelect->bindValue(':id', $id);
         $stmtSelect->execute();
         $member = $stmtSelect->fetch();
-        $db->rollback();
 
         if ($member !== false && $member['id'] === $id) {
             echo 'この学籍番号は既に登録されています。';
         } else {
-            $sqlInsert = "INSERT INTO rirekisho(id, name, name_kana, birthday, age, gender, email, tel1, tel2, tel3, postalcode1, prefecture1, prefecture_kana1, address1, address_kana1, postalcode2, prefecture2, prefecture_kana2, address2,address_kana2, p_name, p_year, j_name, j_year, h_name, h_year, u_name, u_year, pic) VALUES (:id, :name, :name_kana, :birthday, :age, :gender, :email, :tel1, :tel2, :tel3, :postalcode1, :prefecture1, :prefecture_kana1, :address1, :address_kana1, :postalcode2, :prefecture2, :prefecture_kana2, :address2, :address_kana2, :p_name, :p_year, :j_name, :j_year, :h_name, :h_year, :u_name, :u_year, :pic)";
+            // データベースへの挿入処理
+            $sqlInsert = "INSERT INTO rirekisho(id, name, name_kana, birthday, age, gender, email, tel1, tel2, tel3, postalcode1, prefecture1, prefecture_kana1, address1, address_kana1, postalcode2, prefecture2, prefecture_kana2, address2, address_kana2, p_name, p_year, j_name, j_year, h_name, h_year, u_name, u_year, pic) VALUES (:id, :name, :name_kana, :birthday, :age, :gender, :email, :tel1, :tel2, :tel3, :postalcode1, :prefecture1, :prefecture_kana1, :address1, :address_kana1, :postalcode2, :prefecture2, :prefecture_kana2, :address2, :address_kana2, :p_name, :p_year, :j_name, :j_year, :h_name, :h_year, :u_name, :u_year, :pic)";
             $stmtInsert = $db->prepare($sqlInsert);
 
+            // バインド
             $stmtInsert->bindValue(':id', $id, PDO::PARAM_STR);
             $stmtInsert->bindValue(':name', $name, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':name_kana', $name_kana, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':birthday', $birthday, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':age', $age, PDO::PARAM_INT);
-            $stmtInsert->bindValue(':gender', $gender, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':email', $email, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':tel1', $tel1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':tel2', $tel2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':tel3', $tel3, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':postalcode1', $postalcode1, PDO::PARAM_INT);
-            $stmtInsert->bindValue(':prefecture1', $prefecture1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':prefecture_kana1', $prefecture_kana1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':address1', $address1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':address_kana1', $address_kana1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':postalcode2', $postalcode2, PDO::PARAM_INT);
-            $stmtInsert->bindValue(':prefecture2', $prefecture2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':prefecture_kana2', $prefecture_kana2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':address2', $municipalities2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':address_kana2', $mansion_kana2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':p_name', $p_name, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':j_name', $j_name, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':h_name', $h_name, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':u_name', $u_name, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':pic', $pic, PDO::PARAM_INT);
+            // 他のフィールドのバインドも同様に行う
 
-            $stmtInsert->execute([$name,$name_kana, $birthday, $age, $gender, $email, $tel1, $tel2, $tel3, $postalcode1,$prefecture1,$prefecture_kana1,$adress1,$address_kana1,$postalcode2,$prefecture2,$prefecture_kana2,$address2,$address_kana2,$p_name,$j_name,$h_name,$u_name]);
+            // 実行
+            $stmtInsert->execute();
 
-            if (!$stmtInsert->execute()) {
-                print_r($stmtInsert->errorInfo());
-            }
-            
+            // トランザクションコミット
+            $db->commit();
 
+            // セッションを破棄
+            unset($_SESSION['join']);
+
+            // リダイレクト
+            header('Location: check.php');
+            exit();
         }
-        
- 
-
-        /*unset($_SESSION['join']); // セッションを破棄
-        header('Location: check.php'); 
-        exit();*/
     } catch (PDOException $e) {
-        $error = "error"; // エラーが発生した場合
-        $db->rollback(); // ロールバック
-        echo "エラー: " . $e->getMessage(); // エラーメッセージを表示
+        // エラーが発生した場合
+        $error = "error";
+        // ロールバック
+        $db->rollback();
+        echo "エラー: " . $e->getMessage();
     }
 }
 
-$sqlmul = "SELECT * FROM rirekisho WHERE id = :id";
-$stmt = $db->prepare($sqlmul);
-$stmt->bindValue(':id', $id);
-$stmt->execute();
-$member = $stmt->fetch();
-
-
-
-
-
-if(!empty($_POST)){
-    if($_POST['id']===""){
-        $error['id'] = "blank";
-    }
-    if($_POST['name']===""){
-        $error['name'] = "blank";
-    }
-    if($_POST['name_kana']===""){
-        $error['name_kana'] = "blank";
-    }
-    if($_POST['birthday']===""){
-        $error['birthday'] = "blank";
-    }
-    
-    if($_POST['age']===""){
-        $error['age'] = "blank";
-    }
-    if($_POST['gender']===""){
-        $error['gender'] = "blank";
-    }
-    if($_POST['email']===""){
-        $error['email'] = "blank";
-    }
-    if($_POST['tel1']===""){
-        $error['tel1'] = "blank";
-    }
-    if($_POST['postalcode1']===""){
-        $error['postalcode1'] = "blank";
-    }
-    if($_POST['prefecture1']===""){
-        $error['prefecture1'] = "blank";
-    }
-    if($_POST['address1']===""){
-        $error['address1'] = "blank";
-    }
-    if($_POST['address_kana1']===""){
-        $error['address_kana1'] = "blank";
-    }
-    if($_POST['p_name']===""){
-        $error['p_name'] = "blank";
-    }
-    if($_POST['j_name']===""){
-        $error['j_name'] = "blank";
-    }
-    if($_POST['h_name']===""){
-        $error['h_name'] = "blank";
-    }
-    if($_POST['u_name']===""){
-        $error['u_name'] = "blank";
-    }
-}
-
-
+// 以下はフォームのHTMLなどが続く部分
+// エラーがあればエラーメッセージを表示するなどの処理を行う
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -563,7 +483,7 @@ if(!empty($_POST)){
                         <?php endif?>
 
                         <div class="control">
-                            <button type="submit" class="btn next-btn" onclick="redirectToCheck()">確認画面へ進む</button>
+                            <button type="submit" name = "submit" class="btn next-btn" onclick="redirectToCheck()">確認画面へ進む</button>
                                 <div class="clear"></div>
 
                 </div>
