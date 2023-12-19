@@ -1,16 +1,5 @@
 <?php
-<<<<<<< HEAD
 session_start(); // セッションを開始
-=======
-  session_start();
-  if (isset($_SESSION["user_name"])) {
-    $user_name = $_SESSION["user_name"];
-    $message = "ようこそ、{$user_name}さん";
-  } else {
-    $message = "セッションエラー";
-  }
-?>
->>>>>>> f7e6802045f8a14ad8693d1c4a24d1df34f00216
 
 $message = "セッションエラー";
 if (isset($_SESSION["user_name"])) {
@@ -18,6 +7,7 @@ if (isset($_SESSION["user_name"])) {
     $message = "ようこそ、{$user_name}さん";
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -215,14 +205,9 @@ if (isset($_SESSION["user_name"])) {
   <main>
     <div class="container">
       <h1>ホーム</h1>
-<<<<<<< HEAD
       <?php echo $message; ?>
   </div>
-
-
-=======
-    </div>
->>>>>>> f7e6802045f8a14ad8693d1c4a24d1df34f00216
+  </div>
   </main>
 </body>
 </html>
