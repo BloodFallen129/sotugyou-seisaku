@@ -337,7 +337,7 @@ if (!empty($_POST['check'])) {
                     <?php endif ?>
 
 
-            <label>帰省先等 住所</label>
+            <label>帰省先等</label>
                 <label for="postalcode2">郵便番号</label>
                 <input id="postalcode2" type="text" name="postalcode2" maxlength="7" ><br>
                     <?php if(!empty($error["postalcode2"]) && $error['postalcode2'] === 'blank'): ?>
