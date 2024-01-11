@@ -101,6 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     .job{
       width: 200px;
+      margin-bottom: 10px;
     }
 
     .parent{
@@ -117,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
   <div class="login-container">
     <div class="parent">
-      <img class="job" src="image/jobsupport2.png" alt="">
+      <img class="job" src="image/jobsupport-3.png" alt="">
     <h2>就活生用ログイン</h2>
     </div>
     <form id="loginForm" method="post" action="login.php">

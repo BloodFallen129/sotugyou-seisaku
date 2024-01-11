@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
   <style>
     /* カスタムスタイルの追加 */
@@ -45,17 +45,17 @@
 
 }
 
-.header a {
-  color: #896363;
-  text-decoration: none;
-  margin: 0 15px;
-  font-weight: bold;
-  align-items: center;
-  text-align: center;
+    .header a {
+      color: #896363;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      align-items: center;
+      text-align: center;
   
-}
+    }
 
-h1 {
+     h1 {
       text-align: center;
       margin-bottom: 0px;
       color: #443a3a;
@@ -65,13 +65,13 @@ h1 {
       
     }
 
-.logo {
-  width: 170px;
-  height: 60px;
-}
+    .logo {
+     width: 170px;
+     height: 60px;
+    }
 
 
-.anker {
+    .anker {
       display: flex;
       justify-content: center;
       align-items: center;
