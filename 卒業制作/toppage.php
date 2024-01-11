@@ -7,7 +7,6 @@
   } else {
     $message = "セッションエラー";
   }
-=======
 session_start(); // セッションを開始
 
 if (isset($_SESSION["user_name"])) {
@@ -15,7 +14,6 @@ if (isset($_SESSION["user_name"])) {
     $message = "ようこそ、{$user_name}さん";
 } else {
     $message = "セッションエラー";
-<<<<<<< HEAD
 }
 
 $hostname = "k022c2044.mysql.database.azure.com";
@@ -57,8 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // データベース接続を閉じる
     $connection->close();
 }
-=======
-}
+
 
 $hostname = "k022c2044.mysql.database.azure.com";
 $username = "K022C2044";
@@ -99,8 +96,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // データベース接続を閉じる
     $connection->close();
 }
->>>>>>> cb3ce597cab76615503999787796f80498742484
->>>>>>> dadd780293f987ce9152d7e7c8d2df8eb4f4e77c
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -355,32 +350,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
   <main>
     <div class="container">
-<<<<<<< HEAD
     <h1>ホーム</h1>
-=======
-<<<<<<< HEAD
-      <h1>ホーム</h1>
-
-      <?php echo $message; ?>
-  </div>
-=======
-    <h1>ホーム</h1>
->>>>>>> cb3ce597cab76615503999787796f80498742484
->>>>>>> dadd780293f987ce9152d7e7c8d2df8eb4f4e77c
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
   <label for="self_pr">自己PR:</label>
   <textarea name="self_pr" id="self_pr" rows="4" style="width: calc(100% - 30px);" required></textarea>
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-    </div>
-
-  </main>
-=======
->>>>>>> dadd780293f987ce9152d7e7c8d2df8eb4f4e77c
   <label for="aspiratio" style="margin-top: 10px;">志望動機:</label>
   <textarea name="aspiratio" id="aspiratio" rows="4" style="width: calc(100% - 30px);" required></textarea>
 
@@ -394,9 +369,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </form>
 </div>
 </main>
-<<<<<<< HEAD
-=======
->>>>>>> cb3ce597cab76615503999787796f80498742484
->>>>>>> dadd780293f987ce9152d7e7c8d2df8eb4f4e77c
 </body>
 </html>
