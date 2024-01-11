@@ -1,133 +1,52 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$dbname = "gakureki";
-
-try {
-    $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-} catch (PDOException $e) {
-    echo "データベースエラー:" . $e->getMessage();
-}
-
-// セッション開始
 session_start();
 
-// エラー変数を初期化
-$error = '';
+$data = array();
 
-// フォームデータの取得
-$id = isset($_POST['id']) ? $_POST['id'] :'';
-$name = isset($_POST['name']) ? $_POST['name'] :'';
-$name_kana = isset($_POST['name_kana']) ? $_POST['name_kana'] :'';
-$birthday = isset($_POST['birthday']) ? $_POST['birthday'] :'';
-$age = isset($_POST['age']) ? $_POST['age'] :'';
-$gender = isset($_POST['gender']) ? $_POST['gender'] :'';
-$email = isset($_POST['email']) ? $_POST['email'] :'';
-$tel1 = isset($_POST['tel1']) ? $_POST['tel1'] :'';
-$tel2 = isset($_POST['tel2']) ? $_POST['tel2'] :'';
-$tel3 = isset($_POST['tel3']) ? $_POST['tel3'] :'';
-$postalcode1 = isset($_POST['postalcode1']) ? $_POST['postalcode1'] :'';
-$prefecture1 = isset($_POST['prefecture1']) ? $_POST['prefecture1'] :'';
-$prefecture_kana1 = isset($_POST['prefecture_kana1']) ? $_POST['prefecture_kana1'] :'';
-$address1 = isset($_POST['address1']) ? $_POST['address1'] :'';
-$address_kana1 = isset($_POST['address_kana1']) ? $_POST['address_kana1'] :'';
+// フォームからのPOSTデータをセッションに格納
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // フォームの各項目を取得
+    $data['id'] = isset($_POST['id']) ? $_POST['id'] : '';
+    $data['name'] = isset($_POST['name']) ? $_POST['name'] : '';
+    $data['birthday'] = isset($_POST['birthday']) ? $_POST['birthday'] : '';
+    $data['age'] = isset($_POST['age']) ? $_POST['age'] : '';
+    $data['gender'] = isset($_POST['gender']) ? $_POST['gender'] : '';
+    $data['email'] = isset($_POST['email']) ? $_POST['email'] : '';
+    $data['tel1'] = isset($_POST['tel1']) ? $_POST['tel1'] : '';
+    $data['tel2'] = isset($_POST['tel2']) ? $_POST['tel2'] : '';
+    $data['tel3'] = isset($_POST['tel3']) ? $_POST['tel3'] : '';
+    $data['postalcode1'] = isset($_POST['postalcode1']) ? $_POST['postalcode1'] : '';
+    $data['prefecture1'] = isset($_POST['prefecture1']) ? $_POST['prefecture1'] : '';
+    $data['prefecture_kana1'] = isset($_POST['prefecture_kana1']) ? $_POST['prefecture_kana1'] : '';
+    $data['address1'] = isset($_POST['address1']) ? $_POST['address1'] : '';
+    $data['address_kana1'] = isset($_POST['address_kana1']) ? $_POST['address_kana1'] : '';
 
-$postalcode2 = isset($_POST['postalcode2']) ? $_POST['postalcode2'] :'';
-$prefecture2 = isset($_POST['prefecture2']) ? $_POST['prefecture2'] :'';
-$prefecture_kana2 = isset($_POST['prefecture_kana2']) ? $_POST['prefecture_kana2'] :'';
-$address2 = isset($_POST['address2']) ? $_POST['address2'] :'';
-$address_kana2 = isset($_POST['address_kana2']) ? $_POST['address_kana2'] :'';
+    $data['postalcode2'] = isset($_POST['postalcode2']) ? $_POST['postalcode2'] : '';
+    $data['prefecture2'] = isset($_POST['prefecture2']) ? $_POST['prefecture2'] : '';
+    $data['prefecture_kana2'] = isset($_POST['prefecture_kana2']) ? $_POST['prefecture_kana2'] : '';
+    $data['address2'] = isset($_POST['address2']) ? $_POST['address2'] : '';
+    $data['address_kana2'] = isset($_POST['address_kana2']) ? $_POST['address_kana2'] : '';
 
-$p_name = isset($_POST['p_name']) ? $_POST['p_name'] :'';
-$p_year = isset($_POST['p_year']) ? $_POST['p_year'] :'';
-$j_name = isset($_POST['j_name']) ? $_POST['j_name'] :'';
-$j_year = isset($_POST['j_year']) ? $_POST['j_year'] :'';
-$h_name = isset($_POST['h_name']) ? $_POST['h_name'] :'';
-$h_year = isset($_POST['h_year']) ? $_POST['h_year'] :'';
-$u_name = isset($_POST['u_name']) ? $_POST['u_name'] :'';
-$u_year = isset($_POST['u_year']) ? $_POST['u_year'] :'';
+    $data['p_name'] = isset($_POST['p_name']) ? $_POST['p_name'] : '';
+    $data['p_year'] = $_POST['p_year'] ?? null;
 
-$pic = isset($_POST['pic']) ? $_POST['pic'] :'';
+    $data['j_name'] = isset($_POST['j_name']) ? $_POST['j_name'] : '';
+    $data['j_year'] = $_POST['j_year'] ?? null;
 
-// フォームが送信された場合
+    $data['h_name'] = isset($_POST['h_name']) ? $_POST['h_name'] : '';
+    $data['h_year'] = $_POST['h_year'] ?? null;
 
-if (!empty($_POST['check'])) {
-    try {
-        $db->beginTransaction();
+    $data['u_name'] = isset($_POST['u_name']) ? $_POST['u_name'] : '';
+    $data['u_year'] = $_POST['u_year'] ?? null;
 
-        $sqlSelect = "SELECT * FROM rirekisho WHERE id = :id";
-        $stmtSelect = $db->prepare($sqlSelect);
-        $stmtSelect->bindValue(':id', $id);
-        $stmtSelect->execute();
-        $member = $stmtSelect->fetch();
-        
-        if ($member !== false && $member['id'] === $id) {
-            echo 'この学籍番号は既に登録されています。';
-        } else {
-            $sqlInsert = "INSERT INTO rirekisho(id, name, name_kana, birthday, age, gender, email, tel1, tel2, tel3, postalcode1, prefecture1, prefecture_kana1, address1, address_kana1, postalcode2, prefecture2, prefecture_kana2, address2, address_kana2, p_name, p_year, j_name, j_year, h_name, h_year, u_name, u_year, pic) VALUES (:id, :name, :name_kana, :birthday, :age, :gender, :email, :tel1, :tel2, :tel3, :postalcode1, :prefecture1, :prefecture_kana1, :address1, :address_kana1, :postalcode2, :prefecture2, :prefecture_kana2, :address2, :address_kana2, :p_name, :p_year, :j_name, :j_year, :h_name, :h_year, :u_name, :u_year, :pic)";
-            $stmtInsert = $db->prepare($sqlInsert);
-
-            // バインド
-            $stmtInsert->bindValue(':id', $id, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':name', $name, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':name_kana', $name_kana, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':birthday', $birthday, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':age', $age, PDO::PARAM_INT);
-            $stmtInsert->bindValue(':gender', $gender, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':email', $email, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':tel1', $tel1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':tel2', $tel2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':tel3', $tel3, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':postalcode1', $postalcode1, PDO::PARAM_INT);
-            $stmtInsert->bindValue(':prefecture1', $prefecture1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':prefecture_kana1', $prefecture_kana1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':address1', $address1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':address_kana1', $address_kana1, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':postalcode2', $postalcode2, PDO::PARAM_INT);
-            $stmtInsert->bindValue(':prefecture2', $prefecture2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':prefecture_kana2', $prefecture_kana2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':address2', $address2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':address_kana2', $address_kana2, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':p_name', $p_name, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':p_year', $p_year, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':j_name', $j_name, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':j_year', $j_year, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':h_name', $h_name, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':h_year', $h_year, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':u_name', $u_name, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':u_year', $u_year, PDO::PARAM_STR);
-            $stmtInsert->bindValue(':pic', $pic, PDO::PARAM_INT);
-
-            // 実行
-            $stmtInsert->execute();
-
-            // トランザクションコミット
-            $db->commit();
-
-            // セッションを破棄
-            unset($_SESSION['join']);
-
-            // リダイレクト
-            header('Location: check.php');
-            exit();
-        }
-    } catch (PDOException $e) {
-        // エラーが発生した場合
-        $error = "error";
-        // ロールバック
-        $db->rollback();
-        echo "エラー: " . $e->getMessage();
-    }
 }
 
-
-// 以下はフォームのHTMLなどが続く部分
-// エラーがあればエラーメッセージを表示するなどの処理を行う
+// $data 配列をセッションに格納
+$_SESSION['form_data'] = $data;
 ?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -461,6 +380,7 @@ if (!empty($_POST['check'])) {
                     <script>
                         var prefectureSelect1 = document.getElementById("prefecture1");
                         var prefectureKanaInput1 = document.getElementById("prefecture_kana1");
+                        
                         var prefectureSelect2 = document.getElementById("prefecture2");
                         var prefectureKanaInput2 = document.getElementById("prefecture_kana2");
 
@@ -493,7 +413,7 @@ if (!empty($_POST['check'])) {
                     <?php if (!empty($error["p_name"]) && $error['p_name'] === 'blank'): ?>
                         <p class="error">＊入力してください</p>
                         <?php endif?>
-
+                
                 <label for="j_name">中学校名</label>
                 <input id="j_name" type="text" name="j_name" maxlength="255"><br>
                         <?php if(!empty($error["j_name"]) && $error['j_name'] === 'blank'): ?>
@@ -518,6 +438,7 @@ if (!empty($_POST['check'])) {
 
                 </div>
 
+                        
             </div>
         </form>
     </div>
