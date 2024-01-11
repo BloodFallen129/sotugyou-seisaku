@@ -7,57 +7,57 @@ $username = "root";
 $password = "";
 $dbname = "gakureki";
 
-try{
+try {
     $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-}catch(PDOException $e){
-    echo "データベースエラー:" .$e->getMessage();
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // エラーモードを設定
+} catch (PDOException $e) {
+    echo "データベースエラー:" . $e->getMessage();
 }
-$sql = "SELECT * FROM `rirekisho`;";
-$sql = $db->prepare($sql);
-//require_once("./dbconnect.php");
+
 session_start();
 
 // エラー変数を初期化
 $error = '';
 
+// フォームデータのセットアップ
+$formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : array();
 
 if (!empty($_POST['check'])) {
-
     // 入力情報をデータベースに登録
-    $statement = $db->prepare("INSERT INTO rirekisho SET id=?,name=?,name_kana=?,burthday=?,age=?,gender=?,email=?,tel1=?,tel2=?,tel3=?,postalcode1=?,prefecture1=?,prefecture_kana1=?,address1=?,address_kana1=?,postalcode2=?,prefecture2=?,prefecture_kana2=?,address2=?,address_kana2=?,p_name=?,j_name=?,h_name=?,u_name=?,pic=?");
+    $statement = $db->prepare("INSERT INTO rirekisho SET id=?,name=?,name_kana=?,burthday=?,age=?,gender=?,email=?,tel1=?,tel2=?,tel3=?,postalcode1=?,prefecture1=?,prefecture_kana1=?,address1=?,address_kana1=?,postalcode2=?,prefecture2=?,prefecture_kana2=?,address2=?,address_kana2=?,p_name=?,j_name=?,h_name=?,u_name=?");
     $statement->execute(array(
-        $_SESSION['join']['id'],
-        $_SESSION['join']['name'],
-        $_SESSION['join']['name_kana'],
-        $_SESSION['join']['birthday'],
-        $_SESSION['join']['age'],
-        $_SESSION['join']['gender'],
-        $_SESSION['join']['email'],
-        $_SESSION['join']['tel1'],
-        $_SESSION['join']['tel2'],
-        $_SESSION['join']['tel3'],
-        $_SESSION['join']['postalcode1'],
-        $_SESSION['join']['prefecture1'],
-        $_SESSION['join']['prefecture_kana1'],
-        $_SESSION['join']['address1'],
-        $_SESSION['join']['address_kana1'],
-        $_SESSION['join']['postalcode2'],
-        $_SESSION['join']['prefecture2'],
-        $_SESSION['join']['prefecture_kana2'],
-        $_SESSION['join']['address2'],
-        $_SESSION['join']['address_kana2'],
-        $_SESSION['join']['p_name'],
-        $_SESSION['join']['j_name'],
-        $_SESSION['join']['h_name'],
-        $_SESSION['join']['u_name'],
-        $_SESSION['join']['pic'],
+        $formData['id'],
+        $formData['name'],
+        $formData['name_kana'],
+        $formData['birthday'],
+        $formData['age'],
+        $formData['gender'],
+        $formData['email'],
+        $formData['tel1'],
+        $formData['tel2'],
+        $formData['tel3'],
+        $formData['postalcode1'],
+        $formData['prefecture1'],
+        $formData['prefecture_kana1'],
+        $formData['address1'],
+        $formData['address_kana1'],
+        $formData['postalcode2'],
+        $formData['prefecture2'],
+        $formData['prefecture_kana2'],
+        $formData['address2'],
+        $formData['address_kana2'],
+        $formData['p_name'],
+        $formData['j_name'],
+        $formData['h_name'],
+        $formData['u_name'],
     ));
-
-    unset($_SESSION['join']);   // セッションを破棄
+   // セッションを破棄
     header('Location: thank.php');   // thank.phpへ移動
     exit();
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -68,7 +68,7 @@ if (!empty($_POST['check'])) {
 </head>
 <body>
     <div class="content">
-        <form action="" method="POST">
+        <form action="thank.php" method="POST">
             <input type="hidden" name="check" value="checked">
             <div class="content">
    <form action="check.php" method="POST">
@@ -107,7 +107,7 @@ if (!empty($_POST['check'])) {
                 <p>年齢:</p>
                 <p><?php echo isset($_SESSION['join']['age']) ? htmlspecialchars($_SESSION['join']['age'], ENT_QUOTES) : ''; ?></p>
 
-                <p>:性別</p>
+                <p>性別:</p>
                 <p><?php echo isset($_SESSION['join']['gender']) ? htmlspecialchars($_SESSION['join']['gender'], ENT_QUOTES) : ''; ?></p>
 
                 <p>メールアドレス:</p>
