@@ -90,12 +90,15 @@ $connection->close();
     .parent{
       text-align: left;
     }
+    .job{
+      width: 200px;
+    }
   </style>
 </head>
 <body>
   <div class="login-container">
     <div class="parent">
-      <img class="job" src="img/jobsupport.png" alt="">
+      <img class="job" src="img/jobsupport-3.png" alt="">
     <h2>新規登録</h2>
       <form method="post" action="registration.php">
         <label for="student_id">学籍番号:</label>
