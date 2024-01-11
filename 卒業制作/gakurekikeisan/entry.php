@@ -337,7 +337,7 @@ if (!empty($_POST['check'])) {
                     <?php endif ?>
 
 
-            <label>帰省先等 住所</label>
+            <label>帰省先等</label>
                 <label for="postalcode2">郵便番号</label>
                 <input id="postalcode2" type="text" name="postalcode2" maxlength="7" ><br>
                     <?php if(!empty($error["postalcode2"]) && $error['postalcode2'] === 'blank'): ?>
@@ -461,7 +461,6 @@ if (!empty($_POST['check'])) {
                     <script>
                         var prefectureSelect1 = document.getElementById("prefecture1");
                         var prefectureKanaInput1 = document.getElementById("prefecture_kana1");
-                        
                         var prefectureSelect2 = document.getElementById("prefecture2");
                         var prefectureKanaInput2 = document.getElementById("prefecture_kana2");
 
@@ -494,7 +493,7 @@ if (!empty($_POST['check'])) {
                     <?php if (!empty($error["p_name"]) && $error['p_name'] === 'blank'): ?>
                         <p class="error">＊入力してください</p>
                         <?php endif?>
-                
+
                 <label for="j_name">中学校名</label>
                 <input id="j_name" type="text" name="j_name" maxlength="255"><br>
                         <?php if(!empty($error["j_name"]) && $error['j_name'] === 'blank'): ?>
@@ -519,7 +518,6 @@ if (!empty($_POST['check'])) {
 
                 </div>
 
-                        
             </div>
         </form>
     </div>

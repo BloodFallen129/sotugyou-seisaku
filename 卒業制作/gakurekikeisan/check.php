@@ -93,79 +93,83 @@ if (!empty($_POST['check'])) {
 
             <div class="control">
                 <p>学籍番号:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['id'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['id']) ? htmlspecialchars($_SESSION['join']['id'], ENT_QUOTES) : ''; ?></p>
             
                 <p>氏名:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['name'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['name']) ? htmlspecialchars($_SESSION['join']['name'], ENT_QUOTES) : ''; ?></p>
 
                 <p>氏名(ふりがな):</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['name_kana'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['name_kana']) ? htmlspecialchars($_SESSION['join']['name_kana'], ENT_QUOTES) : ''; ?></p>
 
                 <p>生年月日:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['birthday'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['birthday']) ? htmlspecialchars($_SESSION['join']['birthday'], ENT_QUOTES) : ''; ?></p>
 
                 <p>年齢:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['age'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['age']) ? htmlspecialchars($_SESSION['join']['age'], ENT_QUOTES) : ''; ?></p>
 
                 <p>:性別</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['gender'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['gender']) ? htmlspecialchars($_SESSION['join']['gender'], ENT_QUOTES) : ''; ?></p>
+
+                <p>メールアドレス:</p>
+                <p><?php echo isset($_SESSION['join']['email']) ? htmlspecialchars($_SESSION['join']['email'], ENT_QUOTES) : ''; ?></p>
 
                 <p>携帯電話番号:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['tel1'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['tel1']) ? htmlspecialchars($_SESSION['join']['tel1'], ENT_QUOTES) : ''; ?></p>
 
                 <p>電話番号:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['tel2'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['tel2']) ? htmlspecialchars($_SESSION['join']['tel2'], ENT_QUOTES) : ''; ?></p>
 
                 <p>その他記載の必要な電話番号:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['tel3'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['tel3']) ? htmlspecialchars($_SESSION['join']['tel3'], ENT_QUOTES) : ''; ?></p>
 
                 <br>
-                <p>現住所に関して</p>
+                <p>現住所</p>
                 <p>郵便番号:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['postalcode1'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['postalcode1']) ? htmlspecialchars($_SESSION['join']['postalcode1'], ENT_QUOTES) : ''; ?></p>
+
 
                 <p>都道府県:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['prefecture1'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['prefecture1']) ? htmlspecialchars($_SESSION['join']['prefecture1'], ENT_QUOTES) : ''; ?></p>
 
                 <p>都道府県(ふりがな):</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['prefecture_kana1'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['prefecture_kana1']) ? htmlspecialchars($_SESSION['join']['prefecture_kana1'], ENT_QUOTES) : ''; ?></p>
 
                 <p>都道府県名以降の住所:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['address1'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['address1']) ? htmlspecialchars($_SESSION['join']['address1'], ENT_QUOTES) : ''; ?></p>
 
                 <p>都道府県名以降の住所(ふりがな):</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['address_kana1'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['address_kana1']) ? htmlspecialchars($_SESSION['join']['address_kana1'], ENT_QUOTES) : ''; ?></p>
 
                 <br>
-                <p>帰省先等 住所に関して</p>
+                <p>帰省先等</p>
                 <p>郵便番号:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['postalcode2'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['postalcode2']) ? htmlspecialchars($_SESSION['join']['postalcode2'], ENT_QUOTES) : ''; ?></p>
 
                 <p>都道府県:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['prefecture2'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['prefecture2']) ? htmlspecialchars($_SESSION['join']['prefecture2'], ENT_QUOTES) : ''; ?></p>
 
                 <p>都道府県(ふりがな):</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['prefecture_kana2'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['prefecture_kana2']) ? htmlspecialchars($_SESSION['join']['prefecture_kana2'], ENT_QUOTES) : ''; ?></p>
 
                 <p>都道府県名以降の住所:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['address2'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['address2']) ? htmlspecialchars($_SESSION['join']['address2'], ENT_QUOTES) : ''; ?></p>
 
                 <p>都道府県以降の住所(ふりがな):</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['address_kana2'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['address_kana2']) ? htmlspecialchars($_SESSION['join']['address_kana2'], ENT_QUOTES) : ''; ?></p>
 
 
                 <br>
                 <p>小学校名:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['p_name'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['p_name']) ? htmlspecialchars($_SESSION['join']['p_name'], ENT_QUOTES) : ''; ?></p>
 
                 <p>中学校名:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['j_name'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['j_name']) ? htmlspecialchars($_SESSION['join']['j_name'], ENT_QUOTES) : ''; ?></p>
 
                 <p>高等学校名:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['h_name'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['h_name']) ? htmlspecialchars($_SESSION['join']['h_name'], ENT_QUOTES) : ''; ?></p>
 
                 <p>大学等 高等教育機関名:</p>
-                <p><?php echo htmlspecialchars($_SESSION['join']['u_name'], ENT_QUOTES); ?></p>
+                <p><?php echo isset($_SESSION['join']['u_name']) ? htmlspecialchars($_SESSION['join']['u_name'], ENT_QUOTES) : ''; ?></p>
 
 
             </div>
