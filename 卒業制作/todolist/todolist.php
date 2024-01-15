@@ -29,9 +29,7 @@
           background-size:cover;  
   
           /* background-image: url(image/avatar3.jpg); */
-          
-          
-          
+        
           /* align-items: center; */
           font-family: 'Zen Kaku Gothic New', sans-serif;
           /* font-family: 'Mochiy Pop P One', sans-serif; */
@@ -68,9 +66,6 @@
           margin-bottom: 0px;
           color: #443a3a;
           margin-top: 0;
-          
-          
-          
         }
 
         label {
@@ -97,8 +92,8 @@
           margin-right: auto;
           margin-left: auto;
           border:solid;
-          padding: 30px 40px 50px;
-          width:1000px;
+          padding: 30px 50px 40px;
+          width:1350px;
           margin-top :10px;
           border-radius: 20px;
         }
@@ -190,8 +185,8 @@
           padding:0px 0.5rem 0px;
           height:40px; 
         }
-        th#todoLabel { width: 500px;}
-        th#dateLabel { width: 200px; }
+        th#todoLabel { width: 800px;}
+        th#dateLabel { width: 300px; }
         td { text-align: center; 
           color:#000000;}
         td input[type='checkbox'] { 
