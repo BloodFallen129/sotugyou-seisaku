@@ -3,12 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <title>TODOリスト</title>
     <style>
         @import url('https://fonts.cdnfonts.com/css/bradley-hand-2');
@@ -19,52 +13,77 @@
           white-space: nowrap; /* テキストを折り返さないようにする */
           overflow-x: scroll;    /* 横スクロールを有効にする */
           writing-mode: horizontal-tb; /* テキストを横書きに設定 */
-          background-image: url("image/texture-background.jpg");
+          /*background-image: url("image/texture-background.jpg");*/
           background-size: cover;
         }
 
+
         .header {
-        background-color: #f2f4f5;
-        color: #a06969;
-        padding: 20px 0;
-        padding-top: 0px;
-        top: 0;
-        text-align: center;
-        background-image: url(image/DC4DCA11-4EE7-449A-869F-2D847E657C60.jpg);
-        background-size: cover;
-        font-family: 'Zen Kaku Gothic New', sans-serif;
+          background-color: #f2f4f5;
+          color: #a06969;
+          padding: 20px 0;
+          padding-top: 0px;
+          top: 0;
+          text-align: center;
+          background-image: url(image/DC4DCA11-4EE7-449A-869F-2D847E657C60.jpg);
+          background-size:cover;  
+  
+          /* background-image: url(image/avatar3.jpg); */
+        
+          /* align-items: center; */
+          font-family: 'Zen Kaku Gothic New', sans-serif;
+          /* font-family: 'Mochiy Pop P One', sans-serif; */
+          /* font-family: 'Noto Serif JP', serif; */
+
         }
 
         .header a {
-        color: #896363;
-        text-decoration: none;
-        margin: 0 15px;
-        font-weight: bold;
-        align-items: center;
-        text-align: center;
-        }
-
-        h1 {
-        text-align: center;
-        margin-bottom: 0px;
-        color: #443a3a;
-        margin-top: 0;
+          color: #896363;
+          text-decoration: none;
+          margin: 0 15px;
+          font-weight: bold;
+          align-items: center;
+          text-align: center;
+          
         }
 
         .logo {
-        width: 170px;
-        height: 60px;
+          width: 170px;
+          height: 60px;
+        }
+        
+        .container {
+          max-width: 800px;
+          margin: 20px auto;
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .anker {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        h1 {
+          text-align: center;
+          margin-bottom: 0px;
+          color: #443a3a;
+          margin-top: 0;
         }
 
-        
-        
-        
+        label {
+          font-weight: bold;
+          color: #333;
+        }
+
+        body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 5px;
+          /* background-image: url(image/syukatu2.jpg); */
+          /* background-repeat: no-repeat; */
+          /* background-size: cover; */
+          background-color: aliceblue;
+          
+        }
+
         main {
           color:rgb(0, 0, 0);
           background-color: #ffffff;
@@ -73,10 +92,37 @@
           margin-right: auto;
           margin-left: auto;
           border:solid;
-          padding: 30px 40px 50px;
-          width:1000px;
+          padding: 30px 50px 40px;
+          width:1350px;
           margin-top :10px;
           border-radius: 20px;
+        }
+
+        .header-img {
+          width: 130px;
+          height: 130px;
+          margin-right: 10px;
+        }
+
+
+        .header-img-oya{
+          text-align: center;
+          margin-bottom: 10px;
+          
+        }
+          
+    /* アイコンフォントサイズ調整(グーグルフォント) */
+        .material-symbols-outlined {  
+          font-size: 23px;
+        }
+
+    /* 位置調整(グーグルフォント) */
+        .anker {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          /* background-color: #e5eae8; */
+          
         }
 
         label#sentaku{
@@ -139,8 +185,8 @@
           padding:0px 0.5rem 0px;
           height:40px; 
         }
-        th#todoLabel { width: 500px;}
-        th#dateLabel { width: 200px; }
+        th#todoLabel { width: 800px;}
+        th#dateLabel { width: 300px; }
         td { text-align: center; 
           color:#000000;}
         td input[type='checkbox'] { 
@@ -148,7 +194,10 @@
           transform: scale(1.5);
           }
         
-        
+        label#sinki{
+          border: solid 1px #ffffff;
+          margin-left: 20px;
+        }
           
           
     </style>
@@ -156,41 +205,39 @@
 <body>
 <div class="header">
     <h1>就職活動支援サイト JOB SUPPORT</h1>
-    
+
     <div class="oya">
       <a href="toppage.php">
       <img src="image/jobsupport-3.png" alt="Job Support" class="logo">
       </a>
     </div>
 
-    
-
     <div class="anker">
        <a href="gakurekikeisan/entry.php" class="anker"><span class="material-symbols-outlined">
-        draw
+       
         </span>履歴書作成</a> |
 
        <a href="sikaku.php" class="anker"><span class="material-symbols-outlined">
-        content_paste_go
+       
         </span>資格登録</a> |
 
        <a href="mail/index.php" class="anker"><span class="material-symbols-outlined">
-        mail
+      
         </span>メール</a> |
 
        <a href="todolist/todolist.php" class="anker"><span class="material-symbols-outlined">
-        check_circle
         </span>To do</a> |
-        
+
        <a href="calendar.php" class="anker"><span class="material-symbols-outlined">
-        calendar_month
        </span>カレンダー</a>
     </div>
+
   </div>
 
   <main>
     <div id="input">
       <label>TODO: <input id="todo"></label><br>
+
       <label id="sentaku">優先度: </label>
       <select>
         <option>低</option>
