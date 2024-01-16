@@ -121,11 +121,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="login-container">
     <div class="parent">
       <img class="job" src="image/jobsupport-3.png" alt="">
-<<<<<<< HEAD
     <h2>ログインページ</h2>
-=======
-    <h2>就活生用ログイン</h2>
->>>>>>> dadd780293f987ce9152d7e7c8d2df8eb4f4e77c
+
     </div>
     <form id="loginForm" method="post" action="index.php">
       <label for="student_id">学籍番号</label>

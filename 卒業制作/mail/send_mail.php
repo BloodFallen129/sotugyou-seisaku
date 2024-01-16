@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php'; // PHPMailerを読み込む
+require '../vendor/autoload.php'; // PHPMailerを読み込む
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $to = $_POST['to'];

@@ -7,55 +7,6 @@
   } else {
     $message = "セッションエラー";
   }
-session_start(); // セッションを開始
-
-if (isset($_SESSION["user_name"])) {
-    $user_name = $_SESSION["user_name"];
-    $message = "ようこそ、{$user_name}さん";
-} else {
-    $message = "セッションエラー";
-}
-
-$hostname = "k022c2044.mysql.database.azure.com";
-$username = "K022C2044";
-$password = "Noise0926";
-$dbname = "touroku"; // 作成したデータベース名
-
-// データベースに接続
-$connection = mysqli_init();
-
-mysqli_ssl_set($connection, NULL, NULL, 'DigiCertGlobalRootCA.crt.pem', NULL, NULL);
-
-mysqli_real_connect($connection, $hostname, $username, $password, $dbname, 3306, MYSQLI_CLIENT_SSL);
-
-if ($connection->connect_error) {
-    die("データベースに接続できませんでした: " . $connection->connect_error);
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // フォームから送信されたデータの取得
-    if (isset($_POST["self_pr"], $_POST["aspiratio"], $_POST["hobbies"], $_POST["achievements"])) {
-        $self_pr = $connection->real_escape_string($_POST["self_pr"]);
-        $aspiratio = $connection->real_escape_string($_POST["aspiratio"]);
-        $hobbies = $connection->real_escape_string($_POST["hobbies"]);
-        $achievements = $connection->real_escape_string($_POST["achievements"]);
-
-        // データベースにデータを挿入
-        $insert_query = "INSERT INTO syousai (self_pr, aspiratio, hobbies, achievements) VALUES ('$self_pr', '$aspiratio', '$hobbies', '$achievements')";
-
-        if ($connection->query($insert_query) === TRUE) {
-            echo "データが正常に登録されました。<br>";
-        } else {
-            echo "エラー: " . $insert_query . "<br>" . $connection->error;
-        }
-    } else {
-        echo "フォームから正しいデータが送信されませんでした。";
-    }
-
-    // データベース接続を閉じる
-    $connection->close();
-}
-
 
 $hostname = "k022c2044.mysql.database.azure.com";
 $username = "K022C2044";
