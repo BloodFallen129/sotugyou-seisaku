@@ -281,7 +281,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
       
   
-  </style>
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>就職活動支援サイト JOB SUPPORT</h1>
+
+    <div class="oya">
+      <a href="toppage.php">
+      <img src="./image/jobsupport-3.png" alt="Job Support" class="logo">
+      </a>
+    </div>
+
+
+
+    <div class="anker">
+       <a href="gakurekikeisan/entry.php" class="anker"><span class="material-symbols-outlined">
+        draw
+        </span>履歴書作成</a> |
+
+       <a href="sikaku.php" class="anker"><span class="material-symbols-outlined">
+        content_paste_go
+        </span>資格登録</a> |
+
+       <a href="mail/index.php" class="anker"><span class="material-symbols-outlined">
+        mail
+        </span>メール</a> |
+
+       <a href="todolist/todolist.php" class="anker"><span class="material-symbols-outlined">
+        check_circle
+        </span>To do</a> |
+        
+       <a href="calendar.php" class="anker"><span class="material-symbols-outlined">
+        calendar_month
+       </span>カレンダー</a>
+    </div>
+
+  </div>
 </head>
 <body>
 <div class="header">

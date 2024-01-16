@@ -1,4 +1,4 @@
-
+/*
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -25,8 +25,8 @@ width: 200px;
 height: auto;
 position: absolute;
 top: -20px; /* 画像を上に10px移動 */
-left: 10px;
-}
+/*left: 10px;*/
+/*}
 
 
 
@@ -78,3 +78,5 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+*/
+
