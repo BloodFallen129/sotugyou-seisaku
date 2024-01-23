@@ -1,12 +1,12 @@
 <?php
+session_start(); // セッションを開始
 
-  session_start();
-  if (isset($_SESSION["user_name"])) {
+if (isset($_SESSION["user_name"])) {
     $user_name = $_SESSION["user_name"];
     $message = "ようこそ、{$user_name}さん";
-  } else {
+} else {
     $message = "セッションエラー";
-  }
+}
 
 $hostname = "k022c2044.mysql.database.azure.com";
 $username = "K022C2044";
@@ -232,43 +232,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
       
   
-</style>
-</head>
-<body>
-<div class="header">
-    <h1>就職活動支援サイト JOB SUPPORT</h1>
-
-    <div class="oya">
-      <a href="toppage.php">
-      <img src="./image/jobsupport-3.png" alt="Job Support" class="logo">
-      </a>
-    </div>
-
-
-
-    <div class="anker">
-       <a href="gakurekikeisan/entry.php" class="anker"><span class="material-symbols-outlined">
-        draw
-        </span>履歴書作成</a> |
-
-       <a href="sikaku.php" class="anker"><span class="material-symbols-outlined">
-        content_paste_go
-        </span>資格登録</a> |
-
-       <a href="mail/index.php" class="anker"><span class="material-symbols-outlined">
-        mail
-        </span>メール</a> |
-
-       <a href="todolist/todolist.php" class="anker"><span class="material-symbols-outlined">
-        check_circle
-        </span>To do</a> |
-        
-       <a href="calendar.php" class="anker"><span class="material-symbols-outlined">
-        calendar_month
-       </span>カレンダー</a>
-    </div>
-
-  </div>
+  </style>
 </head>
 <body>
 <div class="header">
@@ -353,6 +317,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <textarea name="achievements" id="achievements" rows="4" style="width: calc(100% - 30px);" required></textarea>
 
   <button type="submit" style="width: 100%;">登録</button>
+  <form method="post" action="data.php">
+      <p>登録内容の確認・削除は <a href="data.php">こちら</a></p>
+    </form>
 </form>
 </div>
 </main>
